@@ -86,10 +86,10 @@ class NavHeader extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           YCDot(),
-          ResponsiveWidget.isSmallScreen(context) == false ?
+          if(!ResponsiveWidget.isSmallScreen(context))
             Row(
               children: navButtons,
-            ): null
+            )
         ],
       ),
     );
@@ -102,7 +102,7 @@ class YCDot extends StatelessWidget {
     return Row(
       children: <Widget>[
         Text(
-          'Yogesh Choudhary',
+          'ZEXROSS',
           textScaleFactor: 2,
           style: TextStyle(
             fontWeight: FontWeight.bold,
@@ -176,7 +176,7 @@ class ProfileInfo extends StatelessWidget {
       Text(
         'Hi there! My name is',
         textScaleFactor: 2,
-        style: TextStyle(color: Colors.orange),
+        style: TextStyle(color: Colors.orange, fontFamily: 'assets/GoogleSansRegular.ttf'),
       ),
       Text(
         'Yogesh\nChoudhary',
@@ -184,6 +184,7 @@ class ProfileInfo extends StatelessWidget {
         style: TextStyle(
           color: Colors.white,
           fontWeight: FontWeight.bold,
+          fontFamily: 'assets/GoogleSansRegular.ttf'
         ),
       ),
       SizedBox(
@@ -195,7 +196,7 @@ class ProfileInfo extends StatelessWidget {
         'and work in multi-disciplinary field.',
         softWrap: true,
         textScaleFactor: 1.5,
-        style: TextStyle(color: Colors.white70),
+        style: TextStyle(color: Colors.white70, fontFamily: 'assets/GoogleSansRegular.ttf'),
       ),
       SizedBox(
         height: 20,
@@ -238,7 +239,11 @@ class ProfileInfo extends StatelessWidget {
       largeScreen: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[profileImage(context), profileData],
+        children: <Widget>[profileImage(context),
+        SizedBox(
+            width: MediaQuery.of(context).size.width * 0.1,
+          ), 
+        Expanded(child: profileData)],
       ),
       smallScreen: Column(
         mainAxisSize: MainAxisSize.max,
