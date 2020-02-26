@@ -38775,8 +38775,10 @@ K.IA.prototype={
 $0:function(){C.O.fk(window,"https://www.linkedin.com/in/yogesh-choudhary-a38100144/","Yc")},
 $S:0}
 K.vz.prototype={
-J:function(a){var t=F.bg(a,!1).a.a<800?C.kD:C.fe,s=!(F.bg(a,!1).a.a<800)?T.kD(this.c,C.au,C.bt,C.ag):null
-return B.wX(T.kD(H.b([new K.yn(null),s],u.E),C.au,t,C.ag),null)}}
+J:function(a){var t=F.bg(a,!1).a.a<800?C.kD:C.fe,s=H.b([],u.E)
+s.push(new K.yn(null))
+if(!(F.bg(a,!1).a.a<800))s.push(T.kD(this.c,C.au,C.bt,C.ag))
+return B.wX(T.kD(s,C.au,t,C.ag),null)}}
 K.yn.prototype={
 J:function(a){var t=null,s=L.fA("Yogesh Choudhary",t,A.e0(t,t,t,t,t,t,t,t,t,t,t,t,t,C.bj,t,t,!0,t,t,t,t,t,t),t,2),r=P.cp(0,0,1),q=S.hY(t,t,t,t,C.dr,t,t,C.ar),p=S.CG(8,8)
 return T.kD(H.b([s,new T.cw(5,t,t,t),new G.m4(q,p,C.at,r,t,t)],u.E),C.au,C.bt,C.ag)}}
