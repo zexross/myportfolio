@@ -10,19 +10,19 @@ class ProfilePage extends StatelessWidget {
         NavButton(
           text: 'about',
           onPressed: () {
-            html.window.open('https://www.linkedin.com/in/yogesh-choudhary-a38100144/', 'Yc');
+            html.window.open('https://www.linkedin.com/in/yogesh-choudhary-a38100144/', '_blank');
           },
         ),
         NavButton(
           text: 'work',
           onPressed: () {
-            html.window.open('https://www.linkedin.com/in/yogesh-choudhary-a38100144/', 'Yc');
+            html.window.open('https://www.linkedin.com/in/yogesh-choudhary-a38100144/', '_blank');
           },
         ),
         NavButton(
           text: 'contact',
           onPressed: () {
-            html.window.open('https://www.linkedin.com/in/yogesh-choudhary-a38100144/', 'Yc');
+            html.window.open('https://www.linkedin.com/in/yogesh-choudhary-a38100144/', '_blank');
           },
         ),
       ];
@@ -209,7 +209,7 @@ class ProfileInfo extends StatelessWidget {
             child: Text('Resume'),
             color: Colors.red,
             onPressed: () { 
-              html.window.open('https://www.linkedin.com/in/yogesh-choudhary-a38100144/', 'YC');
+              html.window.open('https://drive.google.com/file/d/1Uu6jdR9PZ8TOHx_GEg17tCrwLo7J3353/view', '_self');
             },
             padding: EdgeInsets.all(10),
           ),
@@ -224,7 +224,7 @@ class ProfileInfo extends StatelessWidget {
             child: Text('Say Hi!'),
             color: Colors.red,
             onPressed: () {
-              html.window.open('https://www.linkedin.com/in/yogesh-choudhary-a38100144/', 'YC');
+              html.window.open('mailto:youzendachoudhary22@gmail.com', '_self');
             },
             padding: EdgeInsets.all(10),
           )
@@ -266,21 +266,21 @@ class SocialInfo extends StatelessWidget {
       NavButton(
         text: 'Github',
         onPressed: () {
-          html.window.open('https://github.com/zexross', 'Git');
+          html.window.open('https://github.com/zexross', '_blank');
         },
         color: Colors.blue,
       ),
       NavButton(
         text: 'Twitter',
         onPressed: () {
-          html.window.open('https://twitter.com/zendacross', 'Twitter');
+          html.window.open('https://twitter.com/zendacross', '_blank');
         },
         color: Colors.blue,
       ),
       NavButton(
         text: 'Facebook',
         onPressed: () {
-          html.window.open('https://www.facebook.com/Yogesh.Choudhary.95', 'Fb');
+          html.window.open('https://www.facebook.com/Yogesh.Choudhary.95', '_blank');
         },
         color: Colors.blue,
       ),
