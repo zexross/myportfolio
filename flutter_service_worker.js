@@ -13,7 +13,7 @@ const RESOURCES = {
 "/assets/FontManifest.json": "1aec13edc46e7b323f753e17a04186ab",
 "/icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
 "/icons/Icon-192.png": "ac9a721a12bbc803b44f645561ecb1e1",
-"/main.dart.js": "9ba89636b92bb4c179ce62d1db8a2e5c"
+"/main.dart.js": "c44b25f81521277d233b4f1bb5f7097d"
 };
 
 self.addEventListener('activate', function (event) {

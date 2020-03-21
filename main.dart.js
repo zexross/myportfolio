@@ -39571,7 +39571,7 @@ return!1}return!0}}
 F.vY.prototype={
 H:function(a){return new S.oi(new K.wZ(null),X.Vp(C.N,"GoogleSansRegular",C.l),!1,null)}}
 K.wZ.prototype={
-yX:function(){return H.b([K.oC(C.dR,new K.Jf(),"about"),K.oC(C.dR,new K.Jg(),"work"),K.oC(C.dR,new K.Jh(),"contact")],u.E)},
+yX:function(){return H.b([K.oC(C.dR,new K.Jf(),"about"),K.oC(C.dR,new K.Jg(),"blog"),K.oC(C.dR,new K.Jh(),"contact")],u.E)},
 H:function(a){var t,s,r,q,p=null,o="assets/GoogleSansRegular.ttf"
 if(F.bg(a,!1).a.a<800){t=this.yX()
 s=P.bl([null,0],u.qI,u.S)
@@ -39586,7 +39586,7 @@ K.Jf.prototype={
 $0:function(){C.T.fw(window,"https://www.linkedin.com/in/yogesh-choudhary-a38100144/","_blank")},
 $S:0}
 K.Jg.prototype={
-$0:function(){C.T.fw(window,"https://www.linkedin.com/in/yogesh-choudhary-a38100144/","_blank")},
+$0:function(){C.T.fw(window,"https://medium.com/@zexross","_blank")},
 $S:0}
 K.Jh.prototype={
 $0:function(){C.T.fw(window,"https://www.linkedin.com/in/yogesh-choudhary-a38100144/","_blank")},
