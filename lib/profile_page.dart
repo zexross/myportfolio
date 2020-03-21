@@ -14,9 +14,9 @@ class ProfilePage extends StatelessWidget {
           },
         ),
         NavButton(
-          text: 'work',
+          text: 'blog',
           onPressed: () {
-            html.window.open('https://www.linkedin.com/in/yogesh-choudhary-a38100144/', '_blank');
+            html.window.open('https://medium.com/@zexross', '_blank');
           },
         ),
         NavButton(
