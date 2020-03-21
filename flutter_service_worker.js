@@ -12,8 +12,8 @@ const RESOURCES = {
 "/assets/assets/FontManifest.json": "fc26ad8cb0c2c1bd0df400fba1a8e6fb",
 "/assets/fonts/MaterialIcons-Regular.ttf": "56d3ffdef7a25659eab6a68a3fbfaf16",
 "/assets/FontManifest.json": "1aec13edc46e7b323f753e17a04186ab",
-"/icons/Icon-512.png": "538cc3c53b8ffa3d73711e7764a52f59",
-"/icons/Icon-192.png": "538cc3c53b8ffa3d73711e7764a52f59",
+"/icons/Icon-512.png": "4754d57e73829290fe3488851cbac8e8",
+"/icons/Icon-192.png": "4754d57e73829290fe3488851cbac8e8",
 "/main.dart.js": "c44b25f81521277d233b4f1bb5f7097d"
 };
 
