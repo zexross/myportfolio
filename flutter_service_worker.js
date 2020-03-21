@@ -2,11 +2,12 @@
 const CACHE_NAME = 'flutter-app-cache';
 const RESOURCES = {
   "/manifest.json": "218160b7641886fdf86132ab637dcce6",
-"/index.html": "4d7afffcba5c80940cde1ea6357267fd",
+"/index.html": "f271ba9654781a3a611a655931aa25ee",
 "/assets/packages/cupertino_icons/assets/CupertinoIcons.ttf": "115e937bb829a890521f72d2e664b632",
-"/assets/AssetManifest.json": "d174dcbc06544d994d328c8656aeabaf",
-"/assets/LICENSE": "964211db6a8b173b1744e68da77ce459",
+"/assets/AssetManifest.json": "6c232a14bafc93f75cc55e7bc943060b",
+"/assets/LICENSE": "a8049a27651f4d3f05d08ab3e9b17397",
 "/assets/assets/yc.jpeg": "dc07ada316cda966ccf0f20a04e038d0",
+"/assets/assets/YClogo.png": "50e526538854b6a7e95585cc0ffffcab",
 "/assets/assets/GoogleSansRegular.ttf": "b5c77a6aed75cdad9489effd0d5ea411",
 "/assets/assets/FontManifest.json": "fc26ad8cb0c2c1bd0df400fba1a8e6fb",
 "/assets/fonts/MaterialIcons-Regular.ttf": "56d3ffdef7a25659eab6a68a3fbfaf16",
