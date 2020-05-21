@@ -191,7 +191,7 @@ class ProfileInfo extends StatelessWidget {
         style: TextStyle(color: Colors.orange, fontFamily: 'assets/GoogleSansRegular.ttf'),
       ),
       Text(
-        'Machine learning Engineering: Discovering new ways to tackle the problems via ML',
+        'Machine learning Engineer: Discovering new ways to tackle the problems via ML',
         textScaleFactor: 3,
         style: TextStyle(
           color: Colors.white,
