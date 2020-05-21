@@ -1,21 +1,22 @@
 import 'dart:html' as html;
 
 import 'package:flutter/material.dart';
-import 'package:myportfolio/project_page.dart';
+import 'package:myportfolio/profile_page.dart';
+import 'package:myportfolio/project_info.dart';
 import 'package:myportfolio/responsive_widget.dart';
 
-class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key key}) : super(key: key);
+class ProjectPage extends StatefulWidget {
+  const ProjectPage({Key key}) : super(key: key);
 
   @override
-  _ProfilePageState createState() => _ProfilePageState();
+  _ProjectPageState createState() => _ProjectPageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _ProjectPageState extends State<ProjectPage> {
 
   @override
 void initState() {
-  html.window.history.pushState("", "ProfilePage", "/");
+  html.window.history.pushState("", "ProjectPage", "/project");
   super.initState();
 }
 
@@ -68,7 +69,7 @@ void initState() {
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.1,
                   ),
-                  ProfileInfo(),
+                  ProjectList(),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.2,
                   ),
@@ -125,11 +126,21 @@ class YCDot extends StatelessWidget {
         ),
         AnimatedContainer(
           duration: Duration(seconds: 1),
-          height: 8,
-          width: 8,
+          height: 20,
+          width: 4,
           decoration: BoxDecoration(
-            shape: BoxShape.circle,
+            shape: BoxShape.rectangle,
             color: Colors.orange,
+          ),
+        ),
+        SizedBox(
+          width: 5,
+        ),
+        Text(
+          'Projects',
+          textScaleFactor: 2,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
           ),
         ),
       ],
@@ -162,118 +173,70 @@ class NavButton extends StatelessWidget {
   }
 }
 
-class ProfileInfo extends StatelessWidget {
-  profileImage(context) => Container(
-        height: ResponsiveWidget.isSmallScreen(context)
-            ? MediaQuery.of(context).size.height * 0.25
-            : MediaQuery.of(context).size.width * 0.25,
-        width: ResponsiveWidget.isSmallScreen(context)
-            ? MediaQuery.of(context).size.height * 0.25
-            : MediaQuery.of(context).size.width * 0.25,
-        decoration: BoxDecoration(
-          backgroundBlendMode: BlendMode.luminosity,
-          color: Colors.deepOrange,
-          shape: BoxShape.circle,
-          image: DecorationImage(
-            image: AssetImage('assets/yc.jpeg'),
-            alignment: Alignment.center,
-            fit: BoxFit.fill,
-          ),
-        ),
-      );
-
-  final profileData = Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: <Widget>[
-      Text(
-        'Hi there! I am',
-        textScaleFactor: 2,
-        style: TextStyle(color: Colors.orange, fontFamily: 'assets/GoogleSansRegular.ttf'),
-      ),
-      Text(
-        'Full time undergrad student \nand part time machine learning researcher ',
-        textScaleFactor: 3,
-        style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-          fontFamily: 'assets/GoogleSansRegular.ttf'
-        ),
-      ),
-      SizedBox(
-        height: 10,
-      ),
-      Text(
-        """I am a final year student with my major in Electronics and Computer Engineering and I am seeking for new opportunities in the field of machine learning. I possess a hardworking and passion driven personality. 
-
-My achiements:
- - Researched and built the complex machine learning models as my side projects.
- - Honored with first prize in the Jazbaa1.0 hackathon organized by IIEC community on July 2019 for developing and pitching a vision aid with AI prototype.
- - Founded the AI club in my college on November 2019 and currently coordinating it
- - Successfully served the AIESEC, a non-profit youth run organization for 6 months duration as Incoming Global Talent member from Aug 2018 – Jan 2019. 
- 
-I am skilled in machine learning, app development(via flutter) and robotics. """,
-        softWrap: true,
-        textScaleFactor: 1.5,
-        style: TextStyle(color: Colors.white70, fontFamily: 'assets/GoogleSansRegular.ttf'),
-      ),
-      SizedBox(
-        height: 20,
-      ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          RaisedButton(
-            shape: StadiumBorder(),
-            child: Text('Resume'),
-            color: Colors.red,
-            onPressed: () { 
-              html.window.open('https://drive.google.com/file/d/1NfZssTc8ar055eyAtlCT8E-lyDVtf0mj/view', '_self');
+class ProjectList extends StatelessWidget {
+  final List<String> captions = [
+    "Deep learning model for MNIST digits",
+    "App built on flutter framework",
+    "App built using native android",
+    "Developed web site on HTML and CSS",
+    "Built a light weight yet powerfull Dodeca Copter"
+  ];
+  final List<String> images = [
+    "assets/deepLearningProject.jpg",
+    "assets/flutterApp.jpg",
+    "assets/androidNativeApp.jpg",
+    "assets/webDevelopmentProject.jpg",
+    "assets/dodecaCopter.jpg"
+  ];
+  final List<String> projectDescriptions = [
+    """The project was aimed at developing a Neural Network model that is able to recognise the hand digit recognition from scratch and to improve its efficiency by hyper tuning the parameters and other optimisation in the model. We extracted and pre-processed the MNIST Data from Courant Institute, NYU and implemented via Multi-Layer Neural Network, Logistic Regression model and Simple Perceptron model. We thoroughly researched and worked on every model and their functions to figure out what works best for achieving better accuracy.""",
+    """I built an interesting game using the flutter framework as my personal project. The game proceeds by asking user the set of questions and then predicting the personality type. The game utilizes complex algorithms to predict the personality type.""",
+    """I along with my teammate researched and developed android application to monitor glucose level of the user. The app visualize glucose data in graphical manner and helps the user get better insights about the glucose variation.""",
+    """I developed Website as the one of my project during my 2 month summer internship(Jun 2019 - July 2019) at the Linux World Informatics PVT Ltd with the help of HTML and CSS for frontend and python as backend for industry automation by autommating the tasks needed in the IT industry.""",
+    """I along with my team built a DodecaCopter for Oprahat competition organized IIT Bombay on December 2017. We utilized the self-designed framework using Palmwood as the material. For Flight Control Board, we used Naze32 and used Betaflight as our Flight Controller Software(Firmware)."""
+  ];
+  projectImage({BuildContext context, String image, String caption, String projectDescription}) => GridTile(
+    child: Hero(
+      tag: caption,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ProjectInfo(projectName: caption, projectImage: image, projectDescription: projectDescription,)));
             },
-            padding: EdgeInsets.all(10),
-          ),
-          SizedBox(
-            width: 20,
-          ),
-          OutlineButton(
-            borderSide: BorderSide(
-              color: Colors.red,
+                      child: Container(
+      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+            decoration: BoxDecoration(
+              backgroundBlendMode: BlendMode.luminosity,
+              color: Colors.deepOrange,
+              shape: BoxShape.rectangle,
+              image: DecorationImage(
+                image: AssetImage(image),
+                alignment: Alignment.center,
+                fit: BoxFit.fill,
+              ),
             ),
-            shape: StadiumBorder(),
-            child: Text('Say Hi!'),
-            color: Colors.red,
-            onPressed: () {
-              html.window.open('mailto:youzendachoudhary22@gmail.com', '_self');
-            },
-            padding: EdgeInsets.all(10),
-          )
-        ],
-      )
-    ],
-  );
+        ),
+          ),
+    ),
+      footer: GridTileBar(backgroundColor: Colors.black54,
+      title: Text(caption, textAlign: TextAlign.center,),),);
 
   @override
   Widget build(BuildContext context) {
     return ResponsiveWidget(
-      largeScreen: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[profileImage(context),
-        SizedBox(
-            width: MediaQuery.of(context).size.width * 0.1,
-          ), 
-        Expanded(child: profileData)],
-      ),
-      smallScreen: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          profileImage(context),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.1,
-          ),
-          profileData
-        ],
-      ),
+      largeScreen: GridView.builder(
+    itemCount: 5,
+    shrinkWrap: true,
+    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount( crossAxisCount: 3, childAspectRatio: 3/2, crossAxisSpacing: 10, mainAxisSpacing: 10),
+    itemBuilder: (BuildContext context, int index) {
+      return projectImage(context: context, caption: captions[index], image: images[index], projectDescription: projectDescriptions[index]);
+    }),
+      smallScreen: GridView.builder(
+    itemCount: 5,
+    shrinkWrap: true,
+    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount( crossAxisCount: 2, childAspectRatio: 1, crossAxisSpacing: 10, mainAxisSpacing: 10),
+    itemBuilder: (BuildContext context, int index) {
+      return projectImage(context: context, caption: captions[index], image: images[index], projectDescription: projectDescriptions[index]);
+    }),
     );
   }
 }

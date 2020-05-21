@@ -1,12 +1,24 @@
+import 'dart:html' as html;
 import 'package:flutter/material.dart';
 import 'package:myportfolio/profile_page.dart';
+import 'package:myportfolio/project_info.dart';
+import 'package:myportfolio/project_page.dart';
 
 void main() {
-  runApp(MyApp());
+  var routePath = "/";
+
+  var route = html.window.document.getElementById("route");
+  if (route != null) {
+    routePath += route.innerHtml;
+  }
+
+  runApp(MyApp(route: routePath));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key key}) : super(key: key);
+  final String route;
+
+  const MyApp({Key key, this.route}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +29,16 @@ class MyApp extends StatelessWidget {
         primaryColorDark: Colors.black,
         fontFamily: 'GoogleSansRegular',
       ),
-      home: ProfilePage(),
+      home: page(),
     );
   }
+
+  Widget page() {
+  switch (route) {
+    case "/": return ProfilePage();
+    case "/project": return ProjectPage();
+    case "/projectInfo": return ProjectInfo();
+    default: return ProfilePage(); // to be double sure
+  }
+}
 }

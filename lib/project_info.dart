@@ -1,21 +1,24 @@
 import 'dart:html' as html;
 
 import 'package:flutter/material.dart';
+import 'package:myportfolio/profile_page.dart';
 import 'package:myportfolio/project_page.dart';
 import 'package:myportfolio/responsive_widget.dart';
 
-class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key key}) : super(key: key);
-
+class ProjectInfo extends StatefulWidget {
+  const ProjectInfo({Key key, @required this.projectName, @required this.projectDescription, @required this.projectImage}) : super(key: key);
+  final String projectName;
+  final String projectImage;
+  final String projectDescription;
   @override
-  _ProfilePageState createState() => _ProfilePageState();
+  _ProjectInfoState createState() => _ProjectInfoState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _ProjectInfoState extends State<ProjectInfo> {
 
   @override
 void initState() {
-  html.window.history.pushState("", "ProfilePage", "/");
+  html.window.history.pushState("", "ProjectInfo", "/project/${widget.projectName}");
   super.initState();
 }
 
@@ -45,9 +48,6 @@ void initState() {
     return ResponsiveWidget(
       largeScreen: Scaffold(
         backgroundColor: Colors.black,
-        appBar: AppBar(
-          backgroundColor: Colors.transparent
-        ),
         drawer: ResponsiveWidget.isSmallScreen(context)
             ? Drawer(
                 child: ListView(
@@ -56,8 +56,17 @@ void initState() {
                 ),
               )
             : null,
-        body: SingleChildScrollView(
-          child: AnimatedPadding(
+        body: CustomScrollView(
+          slivers: <Widget>[
+            SliverAppBar(
+              expandedHeight: 400,
+              pinned: true,
+              flexibleSpace: FlexibleSpaceBar(title: Text(widget.projectName,),
+              background: Hero(tag: widget.projectName, child: Image.asset(widget.projectImage, fit: BoxFit.cover),),),
+            ),
+            SliverList(delegate: SliverChildListDelegate(
+              [
+                AnimatedPadding(
             duration: Duration(seconds: 1),
             padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.1),
             child: ResponsiveWidget(
@@ -68,7 +77,7 @@ void initState() {
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.1,
                   ),
-                  ProfileInfo(),
+                  ProjectDescription(projectDescription: widget.projectDescription),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.2,
                   ),
@@ -77,6 +86,8 @@ void initState() {
               ),
             ),
           ),
+              ],),),
+          ],
         ),
       ),
     );
@@ -97,7 +108,7 @@ class NavHeader extends StatelessWidget {
             : MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          YCDot(),
+          Description(),
           if(!ResponsiveWidget.isSmallScreen(context))
             Row(
               children: navButtons,
@@ -108,13 +119,13 @@ class NavHeader extends StatelessWidget {
   }
 }
 
-class YCDot extends StatelessWidget {
+class Description extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
         Text(
-          'ZEXROSS',
+          'Description',
           textScaleFactor: 2,
           style: TextStyle(
             fontWeight: FontWeight.bold,
@@ -125,10 +136,10 @@ class YCDot extends StatelessWidget {
         ),
         AnimatedContainer(
           duration: Duration(seconds: 1),
-          height: 8,
-          width: 8,
+          height: 20,
+          width: 4,
           decoration: BoxDecoration(
-            shape: BoxShape.circle,
+            shape: BoxShape.rectangle,
             color: Colors.orange,
           ),
         ),
@@ -162,118 +173,26 @@ class NavButton extends StatelessWidget {
   }
 }
 
-class ProfileInfo extends StatelessWidget {
-  profileImage(context) => Container(
-        height: ResponsiveWidget.isSmallScreen(context)
-            ? MediaQuery.of(context).size.height * 0.25
-            : MediaQuery.of(context).size.width * 0.25,
-        width: ResponsiveWidget.isSmallScreen(context)
-            ? MediaQuery.of(context).size.height * 0.25
-            : MediaQuery.of(context).size.width * 0.25,
-        decoration: BoxDecoration(
-          backgroundBlendMode: BlendMode.luminosity,
-          color: Colors.deepOrange,
-          shape: BoxShape.circle,
-          image: DecorationImage(
-            image: AssetImage('assets/yc.jpeg'),
-            alignment: Alignment.center,
-            fit: BoxFit.fill,
-          ),
-        ),
-      );
-
-  final profileData = Column(
+class ProjectDescription extends StatelessWidget {
+  final projectDescription;
+  ProjectDescription({@required this.projectDescription});
+  projectDetail(projectDescription) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
       Text(
-        'Hi there! I am',
-        textScaleFactor: 2,
-        style: TextStyle(color: Colors.orange, fontFamily: 'assets/GoogleSansRegular.ttf'),
-      ),
-      Text(
-        'Full time undergrad student \nand part time machine learning researcher ',
-        textScaleFactor: 3,
-        style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-          fontFamily: 'assets/GoogleSansRegular.ttf'
-        ),
-      ),
-      SizedBox(
-        height: 10,
-      ),
-      Text(
-        """I am a final year student with my major in Electronics and Computer Engineering and I am seeking for new opportunities in the field of machine learning. I possess a hardworking and passion driven personality. 
-
-My achiements:
- - Researched and built the complex machine learning models as my side projects.
- - Honored with first prize in the Jazbaa1.0 hackathon organized by IIEC community on July 2019 for developing and pitching a vision aid with AI prototype.
- - Founded the AI club in my college on November 2019 and currently coordinating it
- - Successfully served the AIESEC, a non-profit youth run organization for 6 months duration as Incoming Global Talent member from Aug 2018 – Jan 2019. 
- 
-I am skilled in machine learning, app development(via flutter) and robotics. """,
+        """$projectDescription""",
         softWrap: true,
         textScaleFactor: 1.5,
         style: TextStyle(color: Colors.white70, fontFamily: 'assets/GoogleSansRegular.ttf'),
       ),
-      SizedBox(
-        height: 20,
-      ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          RaisedButton(
-            shape: StadiumBorder(),
-            child: Text('Resume'),
-            color: Colors.red,
-            onPressed: () { 
-              html.window.open('https://drive.google.com/file/d/1NfZssTc8ar055eyAtlCT8E-lyDVtf0mj/view', '_self');
-            },
-            padding: EdgeInsets.all(10),
-          ),
-          SizedBox(
-            width: 20,
-          ),
-          OutlineButton(
-            borderSide: BorderSide(
-              color: Colors.red,
-            ),
-            shape: StadiumBorder(),
-            child: Text('Say Hi!'),
-            color: Colors.red,
-            onPressed: () {
-              html.window.open('mailto:youzendachoudhary22@gmail.com', '_self');
-            },
-            padding: EdgeInsets.all(10),
-          )
-        ],
-      )
     ],
   );
 
   @override
   Widget build(BuildContext context) {
     return ResponsiveWidget(
-      largeScreen: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[profileImage(context),
-        SizedBox(
-            width: MediaQuery.of(context).size.width * 0.1,
-          ), 
-        Expanded(child: profileData)],
-      ),
-      smallScreen: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          profileImage(context),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.1,
-          ),
-          profileData
-        ],
-      ),
+      largeScreen: projectDetail(projectDescription),
+      smallScreen: projectDetail(projectDescription),
     );
   }
 }
