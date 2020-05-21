@@ -1,16 +1,29 @@
 import 'dart:html' as html;
 
 import 'package:flutter/material.dart';
+import 'package:myportfolio/project_page.dart';
 import 'package:myportfolio/responsive_widget.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({Key key}) : super(key: key);
 
-  List<Widget> navButtons() => [
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+
+  @override
+void initState() {
+  html.window.history.pushState("", "ProfilePage", "/");
+  super.initState();
+}
+
+  List<Widget> navButtons(BuildContext context) => [
         NavButton(
           text: 'about',
           onPressed: () {
-            html.window.open('https://www.linkedin.com/in/yogesh-choudhary-a38100144/', '_blank');
+            Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ProfilePage()));
           },
         ),
         NavButton(
@@ -20,9 +33,9 @@ class ProfilePage extends StatelessWidget {
           },
         ),
         NavButton(
-          text: 'contact',
+          text: 'projects',
           onPressed: () {
-            html.window.open('https://www.linkedin.com/in/yogesh-choudhary-a38100144/', '_blank');
+            Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ProjectPage()));
           },
         ),
       ];
@@ -33,14 +46,13 @@ class ProfilePage extends StatelessWidget {
       largeScreen: Scaffold(
         backgroundColor: Colors.black,
         appBar: AppBar(
-          elevation: 0.0,
-          backgroundColor: Colors.black,
+          backgroundColor: Colors.transparent
         ),
         drawer: ResponsiveWidget.isSmallScreen(context)
             ? Drawer(
                 child: ListView(
                   padding: const EdgeInsets.all(20),
-                  children: navButtons(),
+                  children: navButtons(context),
                 ),
               )
             : null,
@@ -52,7 +64,7 @@ class ProfilePage extends StatelessWidget {
               largeScreen: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  NavHeader(navButtons: navButtons()),
+                  NavHeader(navButtons: navButtons(context)),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.1,
                   ),
@@ -174,13 +186,13 @@ class ProfileInfo extends StatelessWidget {
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
       Text(
-        'Hi there! My name is',
+        'Hi there! I am',
         textScaleFactor: 2,
         style: TextStyle(color: Colors.orange, fontFamily: 'assets/GoogleSansRegular.ttf'),
       ),
       Text(
-        'Yogesh\nChoudhary',
-        textScaleFactor: 5,
+        'Full time undergrad student \nand part time machine learning researcher ',
+        textScaleFactor: 3,
         style: TextStyle(
           color: Colors.white,
           fontWeight: FontWeight.bold,
@@ -191,9 +203,15 @@ class ProfileInfo extends StatelessWidget {
         height: 10,
       ),
       Text(
-        'An autonomous driving enthusiast, hardcore programmer and skilled in the field of Artificial Intelligence.\n'
-        'Ex-AIESECer having Educational background in Electronics and Computer Engineering\n'
-        'and work in multi-disciplinary field.',
+        """I am a final year student with my major in Electronics and Computer Engineering and I am seeking for new opportunities in the field of machine learning. I possess a hardworking and passion driven personality. 
+
+My achiements:
+ - Researched and built the complex machine learning models as my side projects.
+ - Honored with first prize in the Jazbaa1.0 hackathon organized by IIEC community on July 2019 for developing and pitching a vision aid with AI prototype.
+ - Founded the AI club in my college on November 2019 and currently coordinating it
+ - Successfully served the AIESEC, a non-profit youth run organization for 6 months duration as Incoming Global Talent member from Aug 2018 – Jan 2019. 
+ 
+I am skilled in machine learning, app development(via flutter) and robotics. """,
         softWrap: true,
         textScaleFactor: 1.5,
         style: TextStyle(color: Colors.white70, fontFamily: 'assets/GoogleSansRegular.ttf'),
@@ -209,7 +227,7 @@ class ProfileInfo extends StatelessWidget {
             child: Text('Resume'),
             color: Colors.red,
             onPressed: () { 
-              html.window.open('https://drive.google.com/file/d/1Uu6jdR9PZ8TOHx_GEg17tCrwLo7J3353/view', '_self');
+              html.window.open('https://drive.google.com/file/d/1NfZssTc8ar055eyAtlCT8E-lyDVtf0mj/view', '_self');
             },
             padding: EdgeInsets.all(10),
           ),
