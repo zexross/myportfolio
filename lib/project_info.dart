@@ -6,7 +6,7 @@ import 'package:myportfolio/project_page.dart';
 import 'package:myportfolio/responsive_widget.dart';
 
 class ProjectInfo extends StatefulWidget {
-  const ProjectInfo({Key key, @required this.projectName, @required this.projectDescription, @required this.projectImage}) : super(key: key);
+  const ProjectInfo({Key key, this.projectName, this.projectDescription, this.projectImage}) : super(key: key);
   final String projectName;
   final String projectImage;
   final String projectDescription;
@@ -26,7 +26,7 @@ void initState() {
         NavButton(
           text: 'about',
           onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ProfilePage()));
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => ProfilePage()));
           },
         ),
         NavButton(
@@ -38,7 +38,7 @@ void initState() {
         NavButton(
           text: 'projects',
           onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ProjectPage()));
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => ProjectPage()));
           },
         ),
       ];

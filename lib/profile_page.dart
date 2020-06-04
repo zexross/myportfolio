@@ -23,7 +23,7 @@ void initState() {
         NavButton(
           text: 'about',
           onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ProfilePage()));
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => ProfilePage()));
           },
         ),
         NavButton(
@@ -35,7 +35,7 @@ void initState() {
         NavButton(
           text: 'projects',
           onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ProjectPage()));
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => ProjectPage()));
           },
         ),
       ];
@@ -186,7 +186,7 @@ class ProfileInfo extends StatelessWidget {
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
       Text(
-        'Hi there! I am',
+        'Hi there! I am Yogesh',
         textScaleFactor: 2,
         style: TextStyle(color: Colors.orange, fontFamily: 'assets/GoogleSansRegular.ttf'),
       ),

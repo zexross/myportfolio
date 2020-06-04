@@ -24,7 +24,7 @@ void initState() {
         NavButton(
           text: 'about',
           onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ProfilePage()));
+            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (BuildContext context) => ProfilePage()), (Route<dynamic> route) => false);
           },
         ),
         NavButton(
@@ -36,7 +36,7 @@ void initState() {
         NavButton(
           text: 'projects',
           onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ProjectPage()));
+            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (BuildContext context) => ProjectPage()), (Route<dynamic> route) => false);
           },
         ),
       ];
@@ -200,7 +200,7 @@ class ProjectList extends StatelessWidget {
       tag: caption,
           child: GestureDetector(
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ProjectInfo(projectName: caption, projectImage: image, projectDescription: projectDescription,)));
+              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (BuildContext context) => ProjectInfo(projectName: caption, projectImage: image, projectDescription: projectDescription,)), (Route<dynamic> route) => false);
             },
                       child: Container(
       margin: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
@@ -233,7 +233,7 @@ class ProjectList extends StatelessWidget {
       smallScreen: GridView.builder(
     itemCount: 5,
     shrinkWrap: true,
-    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount( crossAxisCount: 2, childAspectRatio: 1, crossAxisSpacing: 10, mainAxisSpacing: 10),
+    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount( crossAxisCount: 1, childAspectRatio: 2, crossAxisSpacing: 10, mainAxisSpacing: 10),
     itemBuilder: (BuildContext context, int index) {
       return projectImage(context: context, caption: captions[index], image: images[index], projectDescription: projectDescriptions[index]);
     }),
