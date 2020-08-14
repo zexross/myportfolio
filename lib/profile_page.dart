@@ -175,7 +175,7 @@ class ProfileInfo extends StatelessWidget {
           color: Colors.deepOrange,
           shape: BoxShape.circle,
           image: DecorationImage(
-            image: AssetImage('assets/yc.jpeg'),
+            image: AssetImage('assets/yc_v1.jpg'),
             alignment: Alignment.center,
             fit: BoxFit.fill,
           ),
@@ -191,7 +191,7 @@ class ProfileInfo extends StatelessWidget {
         style: TextStyle(color: Colors.orange, fontFamily: 'assets/GoogleSansRegular.ttf'),
       ),
       Text(
-        'Machine learning Engineer: Discovering new ways to tackle the problems via ML',
+        'Machine learning Engineer: Discovering new ways to tackle the problems via ML | Flutter Tech Editor at raywenderlich.com',
         textScaleFactor: 3,
         style: TextStyle(
           color: Colors.white,
@@ -291,7 +291,7 @@ class SocialInfo extends StatelessWidget {
       NavButton(
         text: 'Twitter',
         onPressed: () {
-          html.window.open('https://twitter.com/zendacross', '_blank');
+          html.window.open('https://twitter.com/yougesh_09', '_blank');
         },
         color: Colors.blue,
       ),
