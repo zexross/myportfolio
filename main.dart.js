@@ -41041,7 +41041,7 @@ t.pushState(new P.ii([],[]).d9(""),"ProfilePage","/")
 this.b0()},
 fR:function(a){return H.b([K.p4(C.al,new K.Qv(a),"about"),K.p4(C.al,new K.Qw(),"blog"),K.p4(C.al,new K.Qx(a),"projects")],u.p)},
 F:function(a){var t=null,s="assets/GoogleSansRegular.ttf",r=E.Tn(t,t,!0,C.aF,t,1,t,t,t,t,t,t,!0,t,t,t,16,1),q=F.as(a,!1).a.a<800?Z.Tw(B.TY(this.fR(a),C.k4)):t,p=P.c9(0,0,1),o=F.as(a,!1).a.b*0.1,n=u.p
-return B.cZ(M.Uj(r,C.m,E.Xt(G.Tm(B.cZ(T.hn(H.b([new K.wO(this.fR(a),t),new T.bC(t,F.as(a,!1).a.b*0.1,t,t),new K.xJ(T.hn(H.b([L.bP("Hi there! I am Yogesh",t,A.c3(t,t,C.al,t,t,t,t,t,s,t,t,t,t,t,t,t,!0,t,t,t,t,t,t),t,2),L.bP("Machine learning Engineer: Discovering new ways to tackle the problems via ML",t,A.c3(t,t,C.j,t,t,t,t,t,s,t,t,t,t,C.aH,t,t,!0,t,t,t,t,t,t),t,3),new T.bC(t,10,t,t),L.bP("I am a final year student with my major in Electronics and Computer Engineering and I am seeking for new opportunities in the field of machine learning. I possess a hardworking and passion driven personality. \n\nMy achiements:\n - Researched and built the complex machine learning models as my side projects.\n - Honored with first prize in the Jazbaa1.0 hackathon organized by IIEC community on July 2019 for developing and pitching a vision aid with AI prototype.\n - Founded the AI club in my college on November 2019 and currently coordinating it\n - Successfully served the AIESEC, a non-profit youth run organization for 6 months duration as Incoming Global Talent member from Aug 2018 \u2013 Jan 2019. \n \nI am skilled in machine learning, app development(via flutter) and robotics. ",!0,A.c3(t,t,C.I,t,t,t,t,t,s,t,t,t,t,t,t,t,!0,t,t,t,t,t,t),t,1.5),new T.bC(t,20,t,t),T.cn(H.b([D.Xe(t,L.bP("Resume",t,t,t,t),C.ap,C.lf,t,t,t,t,t,t,t,t,t,t,t,t,t,new K.Ku(),new V.aC(10,10,10,10),new S.cA(C.t),t,t,t),new T.bC(20,t,t,t),A.JH(new Y.cO(C.lf,1,C.K),L.bP("Say Hi!",t,t,t,t),C.lf,t,new K.Kv(),new V.aC(10,10,10,10),new S.cA(C.t))],n),C.J,C.ld,C.A)],n),C.cI,C.R,C.A),t),new T.bC(t,F.as(a,!1).a.b*0.2,t,t),new K.z9(t)],n),C.J,C.R,C.A),t),p,new V.aC(o,o,o,o))),q),t)}}
+return B.cZ(M.Uj(r,C.m,E.Xt(G.Tm(B.cZ(T.hn(H.b([new K.wO(this.fR(a),t),new T.bC(t,F.as(a,!1).a.b*0.1,t,t),new K.xJ(T.hn(H.b([L.bP("Hi there! I am Yogesh",t,A.c3(t,t,C.al,t,t,t,t,t,s,t,t,t,t,t,t,t,!0,t,t,t,t,t,t),t,2),L.bP("Machine learning Engineer: Discovering new ways to tackle the problems via ML | Flutter Tech Editor at raywenderlich.com",t,A.c3(t,t,C.j,t,t,t,t,t,s,t,t,t,t,C.aH,t,t,!0,t,t,t,t,t,t),t,3),new T.bC(t,10,t,t),L.bP("I am a final year student with my major in Electronics and Computer Engineering and I am seeking for new opportunities in the field of machine learning. I possess a hardworking and passion driven personality. \n\nMy achiements:\n - Researched and built the complex machine learning models as my side projects.\n - Honored with first prize in the Jazbaa1.0 hackathon organized by IIEC community on July 2019 for developing and pitching a vision aid with AI prototype.\n - Founded the AI club in my college on November 2019 and currently coordinating it\n - Successfully served the AIESEC, a non-profit youth run organization for 6 months duration as Incoming Global Talent member from Aug 2018 \u2013 Jan 2019. \n \nI am skilled in machine learning, app development(via flutter) and robotics. ",!0,A.c3(t,t,C.I,t,t,t,t,t,s,t,t,t,t,t,t,t,!0,t,t,t,t,t,t),t,1.5),new T.bC(t,20,t,t),T.cn(H.b([D.Xe(t,L.bP("Resume",t,t,t,t),C.ap,C.lf,t,t,t,t,t,t,t,t,t,t,t,t,t,new K.Ku(),new V.aC(10,10,10,10),new S.cA(C.t),t,t,t),new T.bC(20,t,t,t),A.JH(new Y.cO(C.lf,1,C.K),L.bP("Say Hi!",t,t,t,t),C.lf,t,new K.Kv(),new V.aC(10,10,10,10),new S.cA(C.t))],n),C.J,C.ld,C.A)],n),C.cI,C.R,C.A),t),new T.bC(t,F.as(a,!1).a.b*0.2,t,t),new K.z9(t)],n),C.J,C.R,C.A),t),p,new V.aC(o,o,o,o))),q),t)}}
 K.Qv.prototype={
 $0:function(){var t=u.z
 K.JA(this.a,V.j3(new K.Qu(),null,t),t,u.K)},
@@ -41070,7 +41070,7 @@ F:function(a){var t=null,s=this.e
 return A.JH(new Y.cO(s,1,C.K),L.bP(this.c,t,t,t,t),t,s,this.d,t,t)}}
 K.xJ.prototype={
 A8:function(a){var t=null,s=F.as(a,!1).a.a<800?F.as(a,!1).a.b*0.25:F.as(a,!1).a.a*0.25,r=F.as(a,!1).a.a<800?F.as(a,!1).a.b*0.25:F.as(a,!1).a.a*0.25
-return M.eG(t,t,t,t,S.eD(C.fR,t,t,t,C.oF,t,X.W5(C.as,C.jU,new L.it("assets/yc.jpeg",t,t)),C.aE),t,s,t,t,t,r)},
+return M.eG(t,t,t,t,S.eD(C.fR,t,t,t,C.oF,t,X.W5(C.as,C.jU,new L.it("assets/yc_v1.jpg",t,t)),C.aE),t,s,t,t,t,r)},
 F:function(a){var t=null,s=this.c,r=u.p
 return B.cZ(T.cn(H.b([this.A8(a),new T.bC(F.as(a,!1).a.a*0.1,t,t,t),T.Wl(s)],r),C.J,C.ld,C.A),T.hn(H.b([this.A8(a),new T.bC(t,F.as(a,!1).a.b*0.1,t,t),s],r),C.J,C.bl,C.A))}}
 K.Ku.prototype={
@@ -41090,7 +41090,7 @@ K.ME.prototype={
 $0:function(){C.L.cP(window,"https://github.com/zexross","_blank")},
 $S:0}
 K.MF.prototype={
-$0:function(){C.L.cP(window,"https://twitter.com/zendacross","_blank")},
+$0:function(){C.L.cP(window,"https://twitter.com/yougesh_09","_blank")},
 $S:0}
 K.MG.prototype={
 $0:function(){C.L.cP(window,"https://www.facebook.com/Yogesh.Choudhary.95","_blank")},
