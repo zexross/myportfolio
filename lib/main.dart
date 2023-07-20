@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
       case "/projectInfo":
         return ProjectInfo();
       default:
-        return ProfilePage(); // to be double sure
+        return ProfilePage();
     }
   }
 }
