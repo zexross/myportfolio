@@ -5,25 +5,27 @@ import 'package:myportfolio/project_page.dart';
 import 'package:myportfolio/responsive_widget.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key key}) : super(key: key);
+  const ProfilePage({Key? key}) : super(key: key);
 
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-
   @override
-void initState() {
-  html.window.history.pushState("", "ProfilePage", "/");
-  super.initState();
-}
+  void initState() {
+    html.window.history.pushState("", "ProfilePage", "/");
+    super.initState();
+  }
 
   List<Widget> navButtons(BuildContext context) => [
         NavButton(
           text: 'about',
           onPressed: () {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => ProfilePage()));
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (BuildContext context) => ProfilePage()));
           },
         ),
         NavButton(
@@ -35,7 +37,10 @@ void initState() {
         NavButton(
           text: 'projects',
           onPressed: () {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => ProjectPage()));
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (BuildContext context) => ProjectPage()));
           },
         ),
       ];
@@ -45,9 +50,7 @@ void initState() {
     return ResponsiveWidget(
       largeScreen: Scaffold(
         backgroundColor: Colors.black,
-        appBar: AppBar(
-          backgroundColor: Colors.transparent
-        ),
+        appBar: AppBar(backgroundColor: Colors.transparent),
         drawer: ResponsiveWidget.isSmallScreen(context)
             ? Drawer(
                 child: ListView(
@@ -86,7 +89,7 @@ void initState() {
 class NavHeader extends StatelessWidget {
   final List<Widget> navButtons;
 
-  const NavHeader({Key key, this.navButtons}) : super(key: key);
+  const NavHeader({Key? key, required this.navButtons}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +101,7 @@ class NavHeader extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           YCDot(),
-          if(!ResponsiveWidget.isSmallScreen(context))
+          if (!ResponsiveWidget.isSmallScreen(context))
             Row(
               children: navButtons,
             )
@@ -143,21 +146,22 @@ class NavButton extends StatelessWidget {
   final Color color;
 
   const NavButton(
-      {Key key,
-      @required this.text,
-      @required this.onPressed,
+      {Key? key,
+      required this.text,
+      required this.onPressed,
       this.color = Colors.orange})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return OutlineButton(
+    return OutlinedButton(
       child: Text(text),
-      borderSide: BorderSide(
-        color: color,
-      ),
+      style: OutlinedButton.styleFrom(
+          side: BorderSide(
+            color: color,
+          ),
+          foregroundColor: Colors.white),
       onPressed: onPressed,
-      highlightedBorderColor: color,
     );
   }
 }
@@ -175,7 +179,7 @@ class ProfileInfo extends StatelessWidget {
           color: Colors.deepOrange,
           shape: BoxShape.circle,
           image: DecorationImage(
-            image: AssetImage('assets/yc_v1.jpg'),
+            image: AssetImage('assets/me.jpeg'),
             alignment: Alignment.center,
             fit: BoxFit.fill,
           ),
@@ -188,22 +192,24 @@ class ProfileInfo extends StatelessWidget {
       Text(
         'Hi there! I am Yogesh',
         textScaleFactor: 2,
-        style: TextStyle(color: Colors.orange, fontFamily: 'assets/GoogleSansRegular.ttf'),
+        style: TextStyle(
+            color: Colors.orange, fontFamily: 'assets/GoogleSansRegular.ttf'),
       ),
       Text(
-        'Machine learning Engineer: Discovering new ways to tackle the problems via ML | Flutter Tech Editor at raywenderlich.com',
-        textScaleFactor: 3,
+        'Machine learning Engineer: Discovering new ways to tackle the problems via ML | Author and Editor at raywenderlich.com',
+        textScaleFactor: 2,
         style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-          fontFamily: 'assets/GoogleSansRegular.ttf'
-        ),
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'assets/GoogleSansRegular.ttf'),
       ),
       SizedBox(
         height: 10,
       ),
       Text(
-        """I am a final year student with my major in Electronics and Computer Engineering and I am seeking for new opportunities in the field of machine learning. I possess a hardworking and passion driven personality. 
+        """Primarily a machine learning engineer but also has good experience in app development and embedded system. I am passionate about learning, sharing, discussing technologies and exploring. I love coding for hours and have a very high bias in the field of vehicle automation due to the complexity and challenges involved in achieving level 5 autonomy.
+
+Out of my coding life, I work on polishing my skills, actively sharing my knowledge by writing and editing articles, dismantling and again rebuilding the hardware around me, playing football and watching anime.
 
 My achiements:
  - Researched and built the complex machine learning models as my side projects.
@@ -213,8 +219,9 @@ My achiements:
  
 I am skilled in machine learning, app development(via flutter) and robotics. """,
         softWrap: true,
-        textScaleFactor: 1.5,
-        style: TextStyle(color: Colors.white70, fontFamily: 'assets/GoogleSansRegular.ttf'),
+        textScaleFactor: 1.2,
+        style: TextStyle(
+            color: Colors.white70, fontFamily: 'assets/GoogleSansRegular.ttf'),
       ),
       SizedBox(
         height: 20,
@@ -222,29 +229,35 @@ I am skilled in machine learning, app development(via flutter) and robotics. """
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          RaisedButton(
-            shape: StadiumBorder(),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              shape: StadiumBorder(),
+              foregroundColor: Colors.white,
+              backgroundColor: Colors.red,
+              padding: EdgeInsets.all(10),
+            ),
             child: Text('Resume'),
-            color: Colors.red,
-            onPressed: () { 
-              html.window.open('https://drive.google.com/file/d/1NfZssTc8ar055eyAtlCT8E-lyDVtf0mj/view', '_self');
+            onPressed: () {
+              html.window.open(
+                  'https://drive.google.com/file/d/1NfZssTc8ar055eyAtlCT8E-lyDVtf0mj/view',
+                  '_self');
             },
-            padding: EdgeInsets.all(10),
           ),
           SizedBox(
             width: 20,
           ),
-          OutlineButton(
-            borderSide: BorderSide(
-              color: Colors.red,
-            ),
-            shape: StadiumBorder(),
+          OutlinedButton(
+            style: OutlinedButton.styleFrom(
+                side: BorderSide(
+                  color: Colors.red,
+                ),
+                shape: StadiumBorder(),
+                foregroundColor: Colors.white,
+                padding: EdgeInsets.all(10)),
             child: Text('Say Hi!'),
-            color: Colors.red,
             onPressed: () {
               html.window.open('mailto:youzendachoudhary22@gmail.com', '_self');
             },
-            padding: EdgeInsets.all(10),
           )
         ],
       )
@@ -257,11 +270,13 @@ I am skilled in machine learning, app development(via flutter) and robotics. """
       largeScreen: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[profileImage(context),
-        SizedBox(
+        children: <Widget>[
+          profileImage(context),
+          SizedBox(
             width: MediaQuery.of(context).size.width * 0.1,
-          ), 
-        Expanded(child: profileData)],
+          ),
+          Expanded(child: profileData)
+        ],
       ),
       smallScreen: Column(
         mainAxisSize: MainAxisSize.max,
@@ -298,7 +313,8 @@ class SocialInfo extends StatelessWidget {
       NavButton(
         text: 'Facebook',
         onPressed: () {
-          html.window.open('https://www.facebook.com/Yogesh.Choudhary.95', '_blank');
+          html.window
+              .open('https://www.facebook.com/Yogesh.Choudhary.95', '_blank');
         },
         color: Colors.blue,
       ),

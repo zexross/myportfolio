@@ -9,7 +9,7 @@ void main() {
 
   var route = html.window.document.getElementById("route");
   if (route != null) {
-    routePath += route.innerHtml;
+    routePath += route.innerHtml!;
   }
 
   runApp(MyApp(route: routePath));
@@ -18,7 +18,7 @@ void main() {
 class MyApp extends StatelessWidget {
   final String route;
 
-  const MyApp({Key key, this.route}) : super(key: key);
+  const MyApp({Key? key, required this.route}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,11 +34,15 @@ class MyApp extends StatelessWidget {
   }
 
   Widget page() {
-  switch (route) {
-    case "/": return ProfilePage();
-    case "/project": return ProjectPage();
-    case "/projectInfo": return ProjectInfo();
-    default: return ProfilePage(); // to be double sure
+    switch (route) {
+      case "/":
+        return ProfilePage();
+      case "/project":
+        return ProjectPage();
+      case "/projectInfo":
+        return ProjectInfo();
+      default:
+        return ProfilePage(); // to be double sure
+    }
   }
-}
 }

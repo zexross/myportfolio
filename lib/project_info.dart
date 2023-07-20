@@ -6,27 +6,32 @@ import 'package:myportfolio/project_page.dart';
 import 'package:myportfolio/responsive_widget.dart';
 
 class ProjectInfo extends StatefulWidget {
-  const ProjectInfo({Key key, this.projectName, this.projectDescription, this.projectImage}) : super(key: key);
-  final String projectName;
-  final String projectImage;
-  final String projectDescription;
+  const ProjectInfo(
+      {Key? key, this.projectName, this.projectDescription, this.projectImage})
+      : super(key: key);
+  final String? projectName;
+  final String? projectImage;
+  final String? projectDescription;
   @override
   _ProjectInfoState createState() => _ProjectInfoState();
 }
 
 class _ProjectInfoState extends State<ProjectInfo> {
-
   @override
-void initState() {
-  html.window.history.pushState("", "ProjectInfo", "/project/${widget.projectName}");
-  super.initState();
-}
+  void initState() {
+    html.window.history
+        .pushState("", "ProjectInfo", "/project/${widget.projectName}");
+    super.initState();
+  }
 
   List<Widget> navButtons(BuildContext context) => [
         NavButton(
           text: 'about',
           onPressed: () {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => ProfilePage()));
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (BuildContext context) => ProfilePage()));
           },
         ),
         NavButton(
@@ -38,7 +43,10 @@ void initState() {
         NavButton(
           text: 'projects',
           onPressed: () {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => ProjectPage()));
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (BuildContext context) => ProjectPage()));
           },
         ),
       ];
@@ -61,32 +69,45 @@ void initState() {
             SliverAppBar(
               expandedHeight: 400,
               pinned: true,
-              flexibleSpace: FlexibleSpaceBar(title: Text(widget.projectName,),
-              background: Hero(tag: widget.projectName, child: Image.asset(widget.projectImage, fit: BoxFit.cover),),),
+              flexibleSpace: FlexibleSpaceBar(
+                title: Text(
+                  widget.projectName ?? '',
+                ),
+                background: Hero(
+                  tag: widget.projectName ?? '',
+                  child:
+                      Image.asset(widget.projectImage ?? '', fit: BoxFit.cover),
+                ),
+              ),
             ),
-            SliverList(delegate: SliverChildListDelegate(
-              [
-                AnimatedPadding(
-            duration: Duration(seconds: 1),
-            padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.1),
-            child: ResponsiveWidget(
-              largeScreen: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  NavHeader(navButtons: navButtons(context)),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.1,
+            SliverList(
+              delegate: SliverChildListDelegate(
+                [
+                  AnimatedPadding(
+                    duration: Duration(seconds: 1),
+                    padding: EdgeInsets.all(
+                        MediaQuery.of(context).size.height * 0.1),
+                    child: ResponsiveWidget(
+                      largeScreen: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          NavHeader(navButtons: navButtons(context)),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.1,
+                          ),
+                          ProjectDescription(
+                              projectDescription: widget.projectDescription),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.2,
+                          ),
+                          SocialInfo(),
+                        ],
+                      ),
+                    ),
                   ),
-                  ProjectDescription(projectDescription: widget.projectDescription),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.2,
-                  ),
-                  SocialInfo(),
                 ],
               ),
             ),
-          ),
-              ],),),
           ],
         ),
       ),
@@ -97,7 +118,7 @@ void initState() {
 class NavHeader extends StatelessWidget {
   final List<Widget> navButtons;
 
-  const NavHeader({Key key, this.navButtons}) : super(key: key);
+  const NavHeader({Key? key, required this.navButtons}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +130,7 @@ class NavHeader extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Description(),
-          if(!ResponsiveWidget.isSmallScreen(context))
+          if (!ResponsiveWidget.isSmallScreen(context))
             Row(
               children: navButtons,
             )
@@ -154,21 +175,22 @@ class NavButton extends StatelessWidget {
   final Color color;
 
   const NavButton(
-      {Key key,
-      @required this.text,
-      @required this.onPressed,
+      {Key? key,
+      required this.text,
+      required this.onPressed,
       this.color = Colors.orange})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return OutlineButton(
+    return OutlinedButton(
       child: Text(text),
-      borderSide: BorderSide(
-        color: color,
+      style: OutlinedButton.styleFrom(
+        side: BorderSide(
+          color: color,
+        ),
       ),
       onPressed: onPressed,
-      highlightedBorderColor: color,
     );
   }
 }
@@ -177,16 +199,18 @@ class ProjectDescription extends StatelessWidget {
   final projectDescription;
   ProjectDescription({@required this.projectDescription});
   projectDetail(projectDescription) => Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: <Widget>[
-      Text(
-        """$projectDescription""",
-        softWrap: true,
-        textScaleFactor: 1.5,
-        style: TextStyle(color: Colors.white70, fontFamily: 'assets/GoogleSansRegular.ttf'),
-      ),
-    ],
-  );
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            """$projectDescription""",
+            softWrap: true,
+            textScaleFactor: 1.5,
+            style: TextStyle(
+                color: Colors.white70,
+                fontFamily: 'assets/GoogleSansRegular.ttf'),
+          ),
+        ],
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -217,7 +241,8 @@ class SocialInfo extends StatelessWidget {
       NavButton(
         text: 'Facebook',
         onPressed: () {
-          html.window.open('https://www.facebook.com/Yogesh.Choudhary.95', '_blank');
+          html.window
+              .open('https://www.facebook.com/Yogesh.Choudhary.95', '_blank');
         },
         color: Colors.blue,
       ),

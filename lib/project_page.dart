@@ -6,7 +6,7 @@ import 'package:myportfolio/project_info.dart';
 import 'package:myportfolio/responsive_widget.dart';
 
 class ProjectPage extends StatefulWidget {
-  const ProjectPage({Key key}) : super(key: key);
+  const ProjectPage({Key? key}) : super(key: key);
 
   @override
   _ProjectPageState createState() => _ProjectPageState();
@@ -87,7 +87,7 @@ void initState() {
 class NavHeader extends StatelessWidget {
   final List<Widget> navButtons;
 
-  const NavHeader({Key key, this.navButtons}) : super(key: key);
+  const NavHeader({Key? key, required this.navButtons}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -154,7 +154,7 @@ class NavButton extends StatelessWidget {
   final Color color;
 
   const NavButton(
-      {Key key,
+      {Key? key,
       @required this.text,
       @required this.onPressed,
       this.color = Colors.orange})
@@ -162,13 +162,13 @@ class NavButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OutlineButton(
+    return OutlinedButton(
       child: Text(text),
-      borderSide: BorderSide(
+      style: OutlinedButtonTheme.of(context).style?.copyWith(side: MaterialStatePropertyAll(BorderSide(
         color: color,
+      ),),
       ),
-      onPressed: onPressed,
-      highlightedBorderColor: color,
+      onPressed: onPressed
     );
   }
 }
@@ -195,7 +195,7 @@ class ProjectList extends StatelessWidget {
     """I developed Website as the one of my project during my 2 month summer internship(Jun 2019 - July 2019) at the Linux World Informatics PVT Ltd with the help of HTML and CSS for frontend and python as backend for industry automation by autommating the tasks needed in the IT industry.""",
     """I along with my team built a DodecaCopter for Oprahat competition organized IIT Bombay on December 2017. We utilized the self-designed framework using Palmwood as the material. For Flight Control Board, we used Naze32 and used Betaflight as our Flight Controller Software(Firmware)."""
   ];
-  projectImage({BuildContext context, String image, String caption, String projectDescription}) => GridTile(
+  projectImage({required BuildContext context, required String image, required String caption, required String projectDescription}) => GridTile(
     child: Hero(
       tag: caption,
           child: GestureDetector(
