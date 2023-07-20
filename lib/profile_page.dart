@@ -216,7 +216,7 @@ My achiements:
  - Founded the AI club in my college on November 2019 and currently coordinating it
  - Successfully served the AIESEC, a non-profit youth run organization for 6 months duration as Incoming Global Talent member from Aug 2018 – Jan 2019. 
  
-I am skilled in machine learning, app development(via flutter) and robotics. """,
+I am skilled in machine learning, app development(via flutter), and robotics. """,
         softWrap: true,
         textScaleFactor: 1.2,
         style: TextStyle(
