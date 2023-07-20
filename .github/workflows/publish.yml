@@ -13,3 +13,5 @@ jobs:
       - uses: subosito/flutter-action@v2
       - run: flutter pub get
       - uses: bluefireteam/flutter-gh-pages@v7
+        with:
+          baseHref: /${{ github.event.repository.name }}/
