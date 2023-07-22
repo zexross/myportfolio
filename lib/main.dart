@@ -1,48 +1,32 @@
-import 'dart:html' as html;
 import 'package:flutter/material.dart';
-import 'package:myportfolio/profile_page.dart';
-import 'package:myportfolio/project_info.dart';
-import 'package:myportfolio/project_page.dart';
+import 'package:url_strategy/url_strategy.dart';
+
+import 'routing/router.dart';
+import 'utils/custom_scroll_behaviour.dart';
 
 void main() {
-  var routePath = "/";
-
-  var route = html.window.document.getElementById("route");
-  if (route != null) {
-    routePath += route.innerHtml!;
-  }
-
-  runApp(MyApp(route: routePath));
+  setPathUrlStrategy();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  final String route;
-
-  const MyApp({Key? key, required this.route}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    final router = WebRouter().router;
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.dark,
         primaryColorDark: Colors.black,
         fontFamily: 'GoogleSansRegular',
       ),
-      home: page(),
+      scrollBehavior: AppScrollBehavior(),
+      routeInformationParser: router.routeInformationParser,
+      routerDelegate: router.routerDelegate,
+      routeInformationProvider: router.routeInformationProvider,
+      backButtonDispatcher: router.backButtonDispatcher,
     );
-  }
-
-  Widget page() {
-    switch (route) {
-      case "/":
-        return ProfilePage();
-      case "/project":
-        return ProjectPage();
-      case "/projectInfo":
-        return ProjectInfo();
-      default:
-        return ProfilePage();
-    }
   }
 }

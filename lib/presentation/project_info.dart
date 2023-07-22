@@ -1,43 +1,46 @@
-import 'dart:html' as html;
-
 import 'package:flutter/material.dart';
-import 'package:myportfolio/profile_page.dart';
-import 'package:myportfolio/project_page.dart';
+import 'package:go_router/go_router.dart';
+import 'package:myportfolio/configs/configs.dart';
+import 'package:myportfolio/model/showcase_project.dart';
 import 'package:myportfolio/responsive_widget.dart';
+import 'package:myportfolio/routing/routes.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import 'project_page.dart';
 
 class ProjectInfo extends StatefulWidget {
-  const ProjectInfo(
-      {Key? key, this.projectName, this.projectDescription, this.projectImage})
-      : super(key: key);
-  final String? projectName;
-  final String? projectImage;
-  final String? projectDescription;
+  const ProjectInfo({Key? key, required this.projectTag}) : super(key: key);
+  final String projectTag;
   @override
   _ProjectInfoState createState() => _ProjectInfoState();
 }
 
 class _ProjectInfoState extends State<ProjectInfo> {
-  @override
+  late final ShowcaseProject showcaseProject;
   void initState() {
-    html.window.history
-        .pushState("", "ProjectInfo", "/project/${widget.projectName}");
+    showcaseProject = ksShowcaseProjects
+        .firstWhere((element) => element.heroTag == widget.projectTag);
     super.initState();
+  }
+
+  Future<void> _launchUrl(String url) async {
+    final uri = Uri.parse(url);
+    if (!await launchUrl(uri)) {
+      throw Exception('Could not launch $url');
+    }
   }
 
   List<Widget> navButtons(BuildContext context) => [
         NavButton(
           text: 'about',
           onPressed: () {
-            Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                    builder: (BuildContext context) => ProfilePage()));
+            context.goNamed(Routes.home.name);
           },
         ),
         NavButton(
           text: 'blog',
           onPressed: () {
-            html.window.open('https://medium.com/@zexross', '_blank');
+            _launchUrl('https://medium.com/@zexross');
           },
         ),
         NavButton(
@@ -71,12 +74,11 @@ class _ProjectInfoState extends State<ProjectInfo> {
               pinned: true,
               flexibleSpace: FlexibleSpaceBar(
                 title: Text(
-                  widget.projectName ?? '',
+                  showcaseProject.title,
                 ),
                 background: Hero(
-                  tag: widget.projectName ?? '',
-                  child:
-                      Image.asset(widget.projectImage ?? '', fit: BoxFit.cover),
+                  tag: showcaseProject.heroTag,
+                  child: Image.asset(showcaseProject.image, fit: BoxFit.cover),
                 ),
               ),
             ),
@@ -96,7 +98,7 @@ class _ProjectInfoState extends State<ProjectInfo> {
                             height: MediaQuery.of(context).size.height * 0.1,
                           ),
                           ProjectDescription(
-                              projectDescription: widget.projectDescription),
+                              projectDescription: showcaseProject.description),
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.2,
                           ),
@@ -222,27 +224,33 @@ class ProjectDescription extends StatelessWidget {
 }
 
 class SocialInfo extends StatelessWidget {
+  Future<void> _launchUrl(String url) async {
+    final uri = Uri.parse(url);
+    if (!await launchUrl(uri)) {
+      throw Exception('Could not launch $url');
+    }
+  }
+
   List<Widget> socialMediaWidgets() {
     return [
       NavButton(
         text: 'Github',
         onPressed: () {
-          html.window.open('https://github.com/zexross', '_blank');
+          _launchUrl('https://github.com/zexross');
         },
         color: Colors.blue,
       ),
       NavButton(
         text: 'Twitter',
         onPressed: () {
-          html.window.open('https://twitter.com/zendacross', '_blank');
+          _launchUrl('https://twitter.com/zendacross');
         },
         color: Colors.blue,
       ),
       NavButton(
         text: 'Facebook',
         onPressed: () {
-          html.window
-              .open('https://www.facebook.com/Yogesh.Choudhary.95', '_blank');
+          _launchUrl('https://www.facebook.com/Yogesh.Choudhary.95');
         },
         color: Colors.blue,
       ),

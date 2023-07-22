@@ -1,8 +1,10 @@
-import 'dart:html' as html;
-
 import 'package:flutter/material.dart';
-import 'package:myportfolio/project_page.dart';
-import 'package:myportfolio/responsive_widget.dart';
+import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+
+import '../responsive_widget.dart';
+import '../routing/routes.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -14,33 +16,31 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
-    html.window.history.pushState("", "ProfilePage", "/");
     super.initState();
+  }
+
+  Future<void> _launchUrl(String url) async {
+    final uri = Uri.parse(url);
+    if (!await launchUrl(uri)) {
+      throw Exception('Could not launch $url');
+    }
   }
 
   List<Widget> navButtons(BuildContext context) => [
         NavButton(
           text: 'about',
-          onPressed: () {
-            Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                    builder: (BuildContext context) => ProfilePage()));
-          },
+          onPressed: () {},
         ),
         NavButton(
           text: 'blog',
           onPressed: () {
-            html.window.open('https://medium.com/@zexross', '_blank');
+            _launchUrl('https://medium.com/@zexross');
           },
         ),
         NavButton(
           text: 'projects',
           onPressed: () {
-            Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                    builder: (BuildContext context) => ProjectPage()));
+            context.goNamed(Routes.project.name);
           },
         ),
       ];
@@ -166,6 +166,13 @@ class NavButton extends StatelessWidget {
 }
 
 class ProfileInfo extends StatelessWidget {
+  Future<void> _launchUrl(String url) async {
+    final uri = Uri.parse(url);
+    if (!await launchUrl(uri)) {
+      throw Exception('Could not launch $url');
+    }
+  }
+
   profileImage(context) => Container(
         height: ResponsiveWidget.isSmallScreen(context)
             ? MediaQuery.of(context).size.height * 0.25
@@ -185,28 +192,30 @@ class ProfileInfo extends StatelessWidget {
         ),
       );
 
-  final profileData = Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: <Widget>[
-      Text(
-        'Hi there! I am Yogesh',
-        textScaleFactor: 2,
-        style: TextStyle(
-            color: Colors.orange, fontFamily: 'assets/GoogleSansRegular.ttf'),
-      ),
-      Text(
-        'Machine learning Engineer: Discovering new ways to tackle the problems via ML | Author and Editor at raywenderlich.com',
-        textScaleFactor: 2,
-        style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'assets/GoogleSansRegular.ttf'),
-      ),
-      SizedBox(
-        height: 10,
-      ),
-      Text(
-        """Primarily a machine learning engineer but also has good experience in app development and embedded system. I am passionate about learning, sharing, discussing technologies and exploring. I love coding for hours and have a very high bias in the field of vehicle automation due to the complexity and challenges involved in achieving level 5 autonomy.
+  @override
+  Widget build(BuildContext context) {
+    final profileData = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          'Hi there! I am Yogesh',
+          textScaleFactor: 2,
+          style: TextStyle(
+              color: Colors.orange, fontFamily: 'assets/GoogleSansRegular.ttf'),
+        ),
+        Text(
+          'Machine learning Engineer: Discovering new ways to tackle the problems via ML | Author and Editor at raywenderlich.com',
+          textScaleFactor: 2,
+          style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'assets/GoogleSansRegular.ttf'),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Text(
+          """Primarily a machine learning engineer but also has good experience in app development and embedded system. I am passionate about learning, sharing, discussing technologies and exploring. I love coding for hours and have a very high bias in the field of vehicle automation due to the complexity and challenges involved in achieving level 5 autonomy.
 
 Out of my coding life, I work on polishing my skills, actively sharing my knowledge by writing and editing articles, dismantling and again rebuilding the hardware around me, playing football and watching anime.
 
@@ -217,54 +226,51 @@ My achiements:
  - Successfully served the AIESEC, a non-profit youth run organization for 6 months duration as Incoming Global Talent member from Aug 2018 – Jan 2019. 
  
 I am skilled in machine learning, app development(via flutter), and robotics. """,
-        softWrap: true,
-        textScaleFactor: 1.2,
-        style: TextStyle(
-            color: Colors.white70, fontFamily: 'assets/GoogleSansRegular.ttf'),
-      ),
-      SizedBox(
-        height: 20,
-      ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              shape: StadiumBorder(),
-              foregroundColor: Colors.white,
-              backgroundColor: Colors.red,
-              padding: EdgeInsets.all(10),
-            ),
-            child: Text('Resume'),
-            onPressed: () {
-              html.window.open(
-                  'https://drive.google.com/file/d/1NfZssTc8ar055eyAtlCT8E-lyDVtf0mj/view',
-                  '_self');
-            },
-          ),
-          SizedBox(
-            width: 20,
-          ),
-          OutlinedButton(
-            style: OutlinedButton.styleFrom(
-                side: BorderSide(
-                  color: Colors.red,
-                ),
+          softWrap: true,
+          textScaleFactor: 1.2,
+          style: TextStyle(
+              color: Colors.white70,
+              fontFamily: 'assets/GoogleSansRegular.ttf'),
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
                 shape: StadiumBorder(),
                 foregroundColor: Colors.white,
-                padding: EdgeInsets.all(10)),
-            child: Text('Say Hi!'),
-            onPressed: () {
-              html.window.open('mailto:youzendachoudhary22@gmail.com', '_self');
-            },
-          )
-        ],
-      )
-    ],
-  );
-
-  @override
-  Widget build(BuildContext context) {
+                backgroundColor: Colors.red,
+                padding: EdgeInsets.all(10),
+              ),
+              child: Text('Resume'),
+              onPressed: () {
+                _launchUrl(
+                    'https://drive.google.com/file/d/1NfZssTc8ar055eyAtlCT8E-lyDVtf0mj/view');
+              },
+            ),
+            SizedBox(
+              width: 20,
+            ),
+            OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                  side: BorderSide(
+                    color: Colors.red,
+                  ),
+                  shape: StadiumBorder(),
+                  foregroundColor: Colors.white,
+                  padding: EdgeInsets.all(10)),
+              child: Text('Say Hi!'),
+              onPressed: () {
+                _launchUrl('mailto:youzendachoudhary22@gmail.com');
+              },
+            )
+          ],
+        )
+      ],
+    );
     return ResponsiveWidget(
       largeScreen: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -293,27 +299,33 @@ I am skilled in machine learning, app development(via flutter), and robotics. ""
 }
 
 class SocialInfo extends StatelessWidget {
+  Future<void> _launchUrl(String url) async {
+    final uri = Uri.parse(url);
+    if (!await launchUrl(uri)) {
+      throw Exception('Could not launch $url');
+    }
+  }
+
   List<Widget> socialMediaWidgets() {
     return [
       NavButton(
         text: 'Github',
         onPressed: () {
-          html.window.open('https://github.com/zexross', '_blank');
+          _launchUrl('https://github.com/zexross');
         },
         color: Colors.blue,
       ),
       NavButton(
         text: 'Twitter',
         onPressed: () {
-          html.window.open('https://twitter.com/yougesh_09', '_blank');
+          _launchUrl('https://twitter.com/yougesh_09');
         },
         color: Colors.blue,
       ),
       NavButton(
         text: 'Facebook',
         onPressed: () {
-          html.window
-              .open('https://www.facebook.com/Yogesh.Choudhary.95', '_blank');
+          _launchUrl('https://www.facebook.com/Yogesh.Choudhary.95');
         },
         color: Colors.blue,
       ),

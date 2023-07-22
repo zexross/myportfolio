@@ -5,29 +5,139 @@
   
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="Yogesh Choudhary - Electronics and Computer Engineer">
+  <meta name="Portfolio" content="Yogesh Choudhary - Electronics and Computer Engineer">
 
   <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="myportfolio">
+  <meta name="apple-mobile-web-app-title" content="Portfolio">
   <link rel="apple-touch-icon" href="/icons/Icon-192.png">
+
+  <!-- Primary Meta Tags -->
+  <title>Yogesh Choudhary</title>
+  <meta name="title" content="Yogesh Choudhary" />
+  <meta name="description" content="Software developer & Machine Learning Engineer" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://zexross.github.io/myportfolio/" />
+  <meta property="og:title" content="Yogesh Choudhary" />
+  <meta property="og:description" content="Software developer & Machine Learning Engineer" />
+  <meta property="og:image" content="https://drive.google.com/file/d/19niUylxzC7DS3_6ez2DVuL8jwHffHXYh" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://zexross.github.io/myportfolio/" />
+  <meta property="twitter:title" content="Yogesh Choudhary" />
+  <meta property="twitter:description" content="Software developer & Machine Learning Engineer" />
+  <meta property="twitter:image" content="https://drive.google.com/file/d/19niUylxzC7DS3_6ez2DVuL8jwHffHXYh" />
+
+  <!-- Meta Tags Generated with https://metatags.io -->
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="https://drive.google.com/file/d/19niUylxzC7DS3_6ez2DVuL8jwHffHXYh"/>
+
 
   <title>Yogesh Choudhary</title>
   <link rel = "icon" href =  "./icons/Icon-192.png" type = "image/x-icon"> 
   <link rel="manifest" href="/manifest.json">
-</head>
-<body>
-  <!-- This script installs service_worker.js to provide PWA functionality to
-       application. For more information, see:
-       https://developers.google.com/web/fundamentals/primers/service-workers -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function () {
-        navigator.serviceWorker.register('/flutter_service_worker.js');
-      });
+  <script type="application/javascript">
+    function openLink(url, target, isAsync=false) {
+      var is_safari = /^(?!.*chrome).*safari/i.test(navigator.userAgent.toLowerCase());
+      if (is_safari && isAsync) {
+        window.location.href = url;
+      } else {
+        window.open(url, target);
+      }
     }
   </script>
-  <script src="main.dart.js" type="application/javascript"></script>
+<script>
+  // The value below is injected by flutter build, do not touch.
+  var serviceWorkerVersion = null;
+</script>
+<!-- This script adds the flutter initialization JS code -->
+<script src="https://unpkg.com/canvaskit-wasm@0.37.1/bin/canvaskit.js"></script>
+<link rel="preload" href="https://unpkg.com/canvaskit-wasm@0.37.1/bin/canvaskit.wasm" as="fetch" crossOrigin="anonymous">
+<script src="flutter.js" defer></script>
+<style>
+  html{
+    background:#070707;
+  }
+  body{
+    display:flex;
+    align-items:center;
+    justify-content: center;
+  }
+  #icon{
+  margin: auto; display: block;
+  }
+  .loading{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+  }
+  .loading-label{
+    font-size: 18px;
+    font-weight: normal;
+    text-align: center;
+    font-style: normal;
+    color: rgb(237, 236, 236);
+    animation-name: changing;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease;
+  }
+
+  @keyframes changing{
+
+  }
+</style>
+<script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+</head>
+<body>
+  <div class="loading" id="loader">
+    <lord-icon
+        src="https://cdn.lordicon.com/gwxsygdo.json"
+        trigger="loop"
+        colors="primary:#ee6d66,secondary:#ebe6ef"
+        style="width:250px;height:250px">
+    </lord-icon>
+      <p class="loading-label"></p>
+  </div>
+    <script>
+          const texts = [
+          "Swapping time and space...",
+          "Pushing pixels...",
+          "Still faster than Windows update...",
+          "Kindly hold on until I finish a cup of coffee...",
+          "Don't panic, Just count to infinity...",
+        ];
+        const element = document.querySelector('p.loading-label');
+        let i=0;
+        const listener = e => {
+          i = i < texts.length - 1 ? i+1 : 0;
+          element.innerHTML  = texts[i];
+        };
+        element.innerHTML = texts[0];
+        element.addEventListener('animationiteration', listener, false);
+  
+      window.addEventListener('load', function(ev) {
+        _flutter.loader.loadEntrypoint({
+          serviceWorker: {
+            serviceWorkerVersion: serviceWorkerVersion,
+          },
+          onEntrypointLoaded: function(engineInitializer) {
+            engineInitializer.initializeEngine().then(function(appRunner) {
+                const loader = document.getElementById("loader");
+                loader.remove();
+                appRunner.runApp();
+            });
+          }
+        });
+      });
+    </script>
 </body>
 </html>

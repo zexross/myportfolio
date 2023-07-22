@@ -1,9 +1,9 @@
-import 'dart:html' as html;
-
 import 'package:flutter/material.dart';
-import 'package:myportfolio/profile_page.dart';
-import 'package:myportfolio/project_info.dart';
+import 'package:go_router/go_router.dart';
+import 'package:myportfolio/configs/constant_strings.dart';
 import 'package:myportfolio/responsive_widget.dart';
+import 'package:myportfolio/routing/routes.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProjectPage extends StatefulWidget {
   const ProjectPage({Key? key}) : super(key: key);
@@ -13,30 +13,35 @@ class ProjectPage extends StatefulWidget {
 }
 
 class _ProjectPageState extends State<ProjectPage> {
-
   @override
-void initState() {
-  html.window.history.pushState("", "ProjectPage", "/project");
-  super.initState();
-}
+  void initState() {
+    super.initState();
+  }
+
+  Future<void> _launchUrl(String url) async {
+    final uri = Uri.parse(url);
+    if (!await launchUrl(uri)) {
+      throw Exception('Could not launch $url');
+    }
+  }
 
   List<Widget> navButtons(BuildContext context) => [
         NavButton(
           text: 'about',
           onPressed: () {
-            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (BuildContext context) => ProfilePage()), (Route<dynamic> route) => false);
+            context.goNamed(Routes.home.name);
           },
         ),
         NavButton(
           text: 'blog',
           onPressed: () {
-            html.window.open('https://medium.com/@zexross', '_blank');
+            _launchUrl('https://medium.com/@zexross');
           },
         ),
         NavButton(
           text: 'projects',
           onPressed: () {
-            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (BuildContext context) => ProjectPage()), (Route<dynamic> route) => false);
+            context.goNamed(Routes.project.name);
           },
         ),
       ];
@@ -46,9 +51,7 @@ void initState() {
     return ResponsiveWidget(
       largeScreen: Scaffold(
         backgroundColor: Colors.black,
-        appBar: AppBar(
-          backgroundColor: Colors.transparent
-        ),
+        appBar: AppBar(backgroundColor: Colors.transparent),
         drawer: ResponsiveWidget.isSmallScreen(context)
             ? Drawer(
                 child: ListView(
@@ -99,7 +102,7 @@ class NavHeader extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           YCDot(),
-          if(!ResponsiveWidget.isSmallScreen(context))
+          if (!ResponsiveWidget.isSmallScreen(context))
             Row(
               children: navButtons,
             )
@@ -163,105 +166,126 @@ class NavButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
-      child: Text(text),
-      style: OutlinedButtonTheme.of(context).style?.copyWith(side: MaterialStatePropertyAll(BorderSide(
-        color: color,
-      ),),
-      ),
-      onPressed: onPressed
-    );
+        child: Text(text),
+        style: OutlinedButtonTheme.of(context).style?.copyWith(
+              side: MaterialStatePropertyAll(
+                BorderSide(
+                  color: color,
+                ),
+              ),
+            ),
+        onPressed: onPressed);
   }
 }
 
 class ProjectList extends StatelessWidget {
-  final List<String> captions = [
-    "Deep learning model for MNIST digits",
-    "App built on flutter framework",
-    "App built using native android",
-    "Developed web site on HTML and CSS",
-    "Built a light weight yet powerfull Dodeca Copter"
-  ];
-  final List<String> images = [
-    "assets/deepLearningProject.jpg",
-    "assets/flutterApp.jpg",
-    "assets/androidNativeApp.jpg",
-    "assets/webDevelopmentProject.jpg",
-    "assets/dodecaCopter.jpg"
-  ];
-  final List<String> projectDescriptions = [
-    """The project was aimed at developing a Neural Network model that is able to recognise the hand digit recognition from scratch and to improve its efficiency by hyper tuning the parameters and other optimisation in the model. We extracted and pre-processed the MNIST Data from Courant Institute, NYU and implemented via Multi-Layer Neural Network, Logistic Regression model and Simple Perceptron model. We thoroughly researched and worked on every model and their functions to figure out what works best for achieving better accuracy.""",
-    """I built an interesting game using the flutter framework as my personal project. The game proceeds by asking user the set of questions and then predicting the personality type. The game utilizes complex algorithms to predict the personality type.""",
-    """I along with my teammate researched and developed android application to monitor glucose level of the user. The app visualize glucose data in graphical manner and helps the user get better insights about the glucose variation.""",
-    """I developed Website as the one of my project during my 2 month summer internship(Jun 2019 - July 2019) at the Linux World Informatics PVT Ltd with the help of HTML and CSS for frontend and python as backend for industry automation by autommating the tasks needed in the IT industry.""",
-    """I along with my team built a DodecaCopter for Oprahat competition organized IIT Bombay on December 2017. We utilized the self-designed framework using Palmwood as the material. For Flight Control Board, we used Naze32 and used Betaflight as our Flight Controller Software(Firmware)."""
-  ];
-  projectImage({required BuildContext context, required String image, required String caption, required String projectDescription}) => GridTile(
-    child: Hero(
-      tag: caption,
+  projectImage(
+          {required BuildContext context,
+          required String image,
+          required String heroTag,
+          required String caption,
+          required String projectDescription}) =>
+      GridTile(
+        child: Hero(
+          tag: caption,
           child: GestureDetector(
             onTap: () {
-              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (BuildContext context) => ProjectInfo(projectName: caption, projectImage: image, projectDescription: projectDescription,)), (Route<dynamic> route) => false);
+              context.goNamed(Routes.projectDetail.name,
+                  pathParameters: {'projectTag': heroTag});
             },
-                      child: Container(
-      margin: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-            decoration: BoxDecoration(
-              backgroundBlendMode: BlendMode.luminosity,
-              color: Colors.deepOrange,
-              shape: BoxShape.rectangle,
-              image: DecorationImage(
-                image: AssetImage(image),
-                alignment: Alignment.center,
-                fit: BoxFit.fill,
+            child: Container(
+              margin: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+              decoration: BoxDecoration(
+                backgroundBlendMode: BlendMode.luminosity,
+                color: Colors.deepOrange,
+                shape: BoxShape.rectangle,
+                image: DecorationImage(
+                  image: AssetImage(image),
+                  alignment: Alignment.center,
+                  fit: BoxFit.fill,
+                ),
               ),
             ),
-        ),
           ),
-    ),
-      footer: GridTileBar(backgroundColor: Colors.black54,
-      title: Text(caption, textAlign: TextAlign.center,),),);
+        ),
+        footer: GridTileBar(
+          backgroundColor: Colors.black54,
+          title: Text(
+            caption,
+            textAlign: TextAlign.center,
+          ),
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {
     return ResponsiveWidget(
       largeScreen: GridView.builder(
-    itemCount: 5,
-    shrinkWrap: true,
-    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount( crossAxisCount: 3, childAspectRatio: 3/2, crossAxisSpacing: 10, mainAxisSpacing: 10),
-    itemBuilder: (BuildContext context, int index) {
-      return projectImage(context: context, caption: captions[index], image: images[index], projectDescription: projectDescriptions[index]);
-    }),
+          itemCount: ksShowcaseProjects.length,
+          shrinkWrap: true,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              childAspectRatio: 3 / 2,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10),
+          itemBuilder: (BuildContext context, int index) {
+            final showCaseProject = ksShowcaseProjects;
+            return projectImage(
+                context: context,
+                caption: showCaseProject[index].title,
+                image: showCaseProject[index].image,
+                heroTag: showCaseProject[index].heroTag,
+                projectDescription: showCaseProject[index].description);
+          }),
       smallScreen: GridView.builder(
-    itemCount: 5,
-    shrinkWrap: true,
-    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount( crossAxisCount: 1, childAspectRatio: 2, crossAxisSpacing: 10, mainAxisSpacing: 10),
-    itemBuilder: (BuildContext context, int index) {
-      return projectImage(context: context, caption: captions[index], image: images[index], projectDescription: projectDescriptions[index]);
-    }),
+          itemCount: ksShowcaseProjects.length,
+          shrinkWrap: true,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 1,
+              childAspectRatio: 2,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10),
+          itemBuilder: (BuildContext context, int index) {
+            final showCaseProject = ksShowcaseProjects;
+            return projectImage(
+                context: context,
+                caption: showCaseProject[index].title,
+                image: showCaseProject[index].image,
+                heroTag: showCaseProject[index].heroTag,
+                projectDescription: showCaseProject[index].description);
+          }),
     );
   }
 }
 
 class SocialInfo extends StatelessWidget {
+  Future<void> _launchUrl(String url) async {
+    final uri = Uri.parse(url);
+    if (!await launchUrl(uri)) {
+      throw Exception('Could not launch $url');
+    }
+  }
+
   List<Widget> socialMediaWidgets() {
     return [
       NavButton(
         text: 'Github',
         onPressed: () {
-          html.window.open('https://github.com/zexross', '_blank');
+          _launchUrl('https://github.com/zexross');
         },
         color: Colors.blue,
       ),
       NavButton(
         text: 'Twitter',
         onPressed: () {
-          html.window.open('https://twitter.com/zendacross', '_blank');
+          _launchUrl('https://twitter.com/zendacross');
         },
         color: Colors.blue,
       ),
       NavButton(
         text: 'Facebook',
         onPressed: () {
-          html.window.open('https://www.facebook.com/Yogesh.Choudhary.95', '_blank');
+          _launchUrl('https://www.facebook.com/Yogesh.Choudhary.95');
         },
         color: Colors.blue,
       ),

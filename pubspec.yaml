@@ -10,16 +10,23 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons:
+  url_strategy: ^0.2.0
+  layout: ^1.0.3
+  go_router: ^10.0.0
+  atlas_icons: ^0.0.12
+  url_launcher: ^6.1.12
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_launcher_icons:
+  flutter_launcher_icons: ^0.13.1
 
-flutter_icons:
-  image_path: 'assets/YClogo.png'
-  android: true
-  ios: true
+flutter_launcher_icons:
+  web:
+    generate: true
+    image_path: "assets/YClogo.png"
+    background_color: "#070707"
+    theme_color: "#ffffff"
 
 flutter:
   uses-material-design: true
@@ -28,6 +35,24 @@ flutter:
       - assets/
 
   fonts:
-    - family: Google
+    - family: Poppins
       fonts:
-        - asset: assets/GoogleSansRegular.ttf
+        - asset: assets/fonts/poppins/Poppins-Regular.ttf
+        - asset: assets/fonts/poppins/Poppins-Italic.ttf
+          style: italic
+        - asset: assets/fonts/poppins/Poppins-ExtraLight.ttf
+          weight: 100
+        - asset: assets/fonts/poppins/Poppins-Light.ttf
+          weight: 200
+        - asset: assets/fonts/poppins/Poppins-Medium.ttf
+          weight: 400
+        - asset: assets/fonts/poppins/Poppins-Regular.ttf
+          weight: 500
+        - asset: assets/fonts/poppins/Poppins-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/poppins/Poppins-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/poppins/Poppins-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/poppins/Poppins-Black.ttf
+          weight: 900
