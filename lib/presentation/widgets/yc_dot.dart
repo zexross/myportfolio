@@ -11,7 +11,7 @@ class YCDot extends StatelessWidget {
       children: <Widget>[
         Text(
           'ZEXROSS',
-          textScaleFactor: 2,
+          textScaler: TextScaler.linear(2),
           style: TextStyle(
             fontWeight: FontWeight.bold,
           ),
@@ -32,7 +32,7 @@ class YCDot extends StatelessWidget {
           SizedBox(width: 5),
           Text(
             title!,
-            textScaleFactor: 2, // Match "ZEXROSS" scaling
+            textScaler: TextScaler.linear(2), // Match "ZEXROSS" scaling
             style: TextStyle(
               fontWeight: FontWeight.bold,
             ),

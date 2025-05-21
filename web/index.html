@@ -52,8 +52,6 @@
     }
   </script>
 <script>
-  // The value below is injected by flutter build, do not touch.
-  var serviceWorkerVersion = null;
 </script>
 <!-- This script adds the flutter initialization JS code -->
 <script src="https://unpkg.com/canvaskit-wasm@0.37.1/bin/canvaskit.js"></script>
@@ -108,6 +106,10 @@
       <p class="loading-label"></p>
   </div>
     <script>
+
+          {{flutter_js}}
+          {{flutter_build_config}}
+          
           const texts = [
           "Swapping time and space...",
           "Pushing pixels...",
@@ -125,15 +127,13 @@
         element.addEventListener('animationiteration', listener, false);
   
       window.addEventListener('load', function(ev) {
-        _flutter.loader.loadEntrypoint({
-          serviceWorker: {
-            serviceWorkerVersion: serviceWorkerVersion,
-          },
+        // Initialize Flutter configuration
+        _flutter.loader.load({
           onEntrypointLoaded: function(engineInitializer) {
             engineInitializer.initializeEngine().then(function(appRunner) {
-                const loader = document.getElementById("loader");
-                loader.remove();
-                appRunner.runApp();
+              const loader = document.getElementById("loader");
+              loader.remove();
+              appRunner.runApp();
             });
           }
         });

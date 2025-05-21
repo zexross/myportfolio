@@ -125,8 +125,6 @@ extension ThemeEx on BuildContext {
       onSecondary: kSecondary,
       error: kRed,
       onError: kRed100,
-      background: kWhite,
-      onBackground: kWhite,
       surface: kGrey100,
       onSurface: kGrey100,
     );

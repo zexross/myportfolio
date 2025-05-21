@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:myportfolio/presentation/widgets/nav_button.dart';
 import 'package:myportfolio/presentation/widgets/nav_header.dart';
 import 'package:myportfolio/presentation/widgets/yc_dot.dart';
-import 'package:myportfolio/responsive_widget.dart'; // Assuming this path is correct for the test environment
+// Assuming this path is correct for the test environment
 
 // A simple mock for ResponsiveWidget for consistent testing if needed,
 // or rely on MaterialApp to provide MediaQuery.

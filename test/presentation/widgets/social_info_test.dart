@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:myportfolio/presentation/widgets/nav_button.dart';
 import 'package:myportfolio/presentation/widgets/social_info.dart';
-import 'package:myportfolio/responsive_widget.dart'; // Assuming this path
+// Assuming this path
 
 // Helper function to wrap widget for testing
 Widget createTestableWidget({required Widget child}) {

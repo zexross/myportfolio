@@ -56,3 +56,10 @@ flutter:
           weight: 800
         - asset: assets/fonts/poppins/Poppins-Black.ttf
           weight: 900
+    - family: Noto Sans
+      fonts:
+        - asset: assets/fonts/noto/NotoSans-Regular.ttf
+        - asset: assets/fonts/noto/NotoSans-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/noto/NotoSans-Italic.ttf
+          style: italic
