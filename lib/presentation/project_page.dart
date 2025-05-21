@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:myportfolio/configs/constant_strings.dart';
-import 'package:myportfolio/responsive_widget.dart';
-import 'package:myportfolio/routing/routes.dart';
+import '../responsive_widget.dart'; // Changed to relative import
+import '../routing/routes.dart'; // Changed to relative import
 import 'package:url_launcher/url_launcher.dart';
+import 'package:myportfolio/presentation/widgets/widgets.dart'; // Import new widgets
 
 class ProjectPage extends StatefulWidget {
   const ProjectPage({Key? key}) : super(key: key);
@@ -68,7 +69,7 @@ class _ProjectPageState extends State<ProjectPage> {
               largeScreen: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  NavHeader(navButtons: navButtons(context)),
+                  NavHeader(navButtons: navButtons(context), pageTitle: "Projects"),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.1,
                   ),
@@ -84,97 +85,6 @@ class _ProjectPageState extends State<ProjectPage> {
         ),
       ),
     );
-  }
-}
-
-class NavHeader extends StatelessWidget {
-  final List<Widget> navButtons;
-
-  const NavHeader({Key? key, required this.navButtons}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ResponsiveWidget(
-      largeScreen: Row(
-        mainAxisAlignment: ResponsiveWidget.isSmallScreen(context)
-            ? MainAxisAlignment.center
-            : MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          YCDot(),
-          if (!ResponsiveWidget.isSmallScreen(context))
-            Row(
-              children: navButtons,
-            )
-        ],
-      ),
-    );
-  }
-}
-
-class YCDot extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        Text(
-          'ZEXROSS',
-          textScaleFactor: 2,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        SizedBox(
-          width: 5,
-        ),
-        AnimatedContainer(
-          duration: Duration(seconds: 1),
-          height: 20,
-          width: 4,
-          decoration: BoxDecoration(
-            shape: BoxShape.rectangle,
-            color: Colors.orange,
-          ),
-        ),
-        SizedBox(
-          width: 5,
-        ),
-        Text(
-          'Projects',
-          textScaleFactor: 2,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class NavButton extends StatelessWidget {
-  final text;
-  final onPressed;
-  final Color color;
-
-  const NavButton(
-      {Key? key,
-      @required this.text,
-      @required this.onPressed,
-      this.color = Colors.orange})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return OutlinedButton(
-        child: Text(text),
-        style: OutlinedButtonTheme.of(context).style?.copyWith(
-              side: MaterialStatePropertyAll(
-                BorderSide(
-                  color: color,
-                ),
-              ),
-            ),
-        onPressed: onPressed);
   }
 }
 
@@ -254,72 +164,6 @@ class ProjectList extends StatelessWidget {
                 heroTag: showCaseProject[index].heroTag,
                 projectDescription: showCaseProject[index].description);
           }),
-    );
-  }
-}
-
-class SocialInfo extends StatelessWidget {
-  Future<void> _launchUrl(String url) async {
-    final uri = Uri.parse(url);
-    if (!await launchUrl(uri)) {
-      throw Exception('Could not launch $url');
-    }
-  }
-
-  List<Widget> socialMediaWidgets() {
-    return [
-      NavButton(
-        text: 'Github',
-        onPressed: () {
-          _launchUrl('https://github.com/zexross');
-        },
-        color: Colors.blue,
-      ),
-      NavButton(
-        text: 'Twitter',
-        onPressed: () {
-          _launchUrl('https://twitter.com/zendacross');
-        },
-        color: Colors.blue,
-      ),
-      NavButton(
-        text: 'Facebook',
-        onPressed: () {
-          _launchUrl('https://www.facebook.com/Yogesh.Choudhary.95');
-        },
-        color: Colors.blue,
-      ),
-    ];
-  }
-
-  Widget copyRightText() => Text(
-        'Yogesh Choudhary ©️2020',
-        textAlign: TextAlign.center,
-        style: TextStyle(
-          color: Colors.grey,
-        ),
-      );
-
-  @override
-  Widget build(BuildContext context) {
-    return ResponsiveWidget(
-      largeScreen: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: socialMediaWidgets(),
-          ),
-          copyRightText(),
-        ],
-      ),
-      smallScreen: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          ...socialMediaWidgets(),
-          copyRightText(),
-        ],
-      ),
     );
   }
 }

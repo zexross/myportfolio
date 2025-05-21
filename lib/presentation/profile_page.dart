@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
-
+import 'package:myportfolio/presentation/widgets/widgets.dart'; // Import new widgets
 
 import '../responsive_widget.dart';
 import '../routing/routes.dart';
@@ -85,86 +85,6 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 }
 
-class NavHeader extends StatelessWidget {
-  final List<Widget> navButtons;
-
-  const NavHeader({Key? key, required this.navButtons}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ResponsiveWidget(
-      largeScreen: Row(
-        mainAxisAlignment: ResponsiveWidget.isSmallScreen(context)
-            ? MainAxisAlignment.center
-            : MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          YCDot(),
-          if (!ResponsiveWidget.isSmallScreen(context))
-            Row(
-              children: navButtons,
-            )
-        ],
-      ),
-    );
-  }
-}
-
-class YCDot extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        Text(
-          'ZEXROSS',
-          textScaleFactor: 2,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        SizedBox(
-          width: 5,
-        ),
-        AnimatedContainer(
-          duration: Duration(seconds: 1),
-          height: 8,
-          width: 8,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: Colors.orange,
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class NavButton extends StatelessWidget {
-  final text;
-  final onPressed;
-  final Color color;
-
-  const NavButton(
-      {Key? key,
-      required this.text,
-      required this.onPressed,
-      this.color = Colors.orange})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return OutlinedButton(
-      child: Text(text),
-      style: OutlinedButton.styleFrom(
-          side: BorderSide(
-            color: color,
-          ),
-          foregroundColor: Colors.white),
-      onPressed: onPressed,
-    );
-  }
-}
-
 class ProfileInfo extends StatelessWidget {
   Future<void> _launchUrl(String url) async {
     final uri = Uri.parse(url);
@@ -173,13 +93,23 @@ class ProfileInfo extends StatelessWidget {
     }
   }
 
-  profileImage(context) => Container(
-        height: ResponsiveWidget.isSmallScreen(context)
-            ? MediaQuery.of(context).size.height * 0.25
-            : MediaQuery.of(context).size.width * 0.25,
-        width: ResponsiveWidget.isSmallScreen(context)
-            ? MediaQuery.of(context).size.height * 0.25
-            : MediaQuery.of(context).size.width * 0.25,
+  profileImage(BuildContext context) { // Added BuildContext type
+    final screenWidth = MediaQuery.of(context).size.width;
+    double imageSize;
+
+    if (ResponsiveWidget.isSmallScreen(context)) {
+      imageSize = screenWidth * 0.4; // Adjusted for small screens (e.g., 40% of width)
+    } else if (ResponsiveWidget.isMediumScreen(context)) {
+      imageSize = screenWidth * 0.3; // Adjusted for medium screens (e.g., 30% of width)
+    } else {
+      imageSize = screenWidth * 0.25; // For large screens
+    }
+    // Ensure a minimum and maximum size to prevent extreme scaling
+    imageSize = imageSize.clamp(100.0, 300.0);
+
+    return Container(
+        height: imageSize,
+        width: imageSize,
         decoration: BoxDecoration(
           backgroundBlendMode: BlendMode.luminosity,
           color: Colors.deepOrange,
@@ -194,22 +124,33 @@ class ProfileInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    double titleScaleFactor = 2.0;
+    double subtitleScaleFactor = 1.5; // Adjusted from 2.0 for the longer title
+
+    if (screenWidth < 600) { // Small screens
+      titleScaleFactor = 1.8;
+      subtitleScaleFactor = 1.3;
+    } else if (screenWidth < 1200) { // Medium screens
+      titleScaleFactor = 1.9;
+      subtitleScaleFactor = 1.4;
+    }
+    // Large screens will use the default 2.0 and 1.5
+
     final profileData = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
           'Hi there! I am Yogesh',
-          textScaleFactor: 2,
-          style: TextStyle(
-              color: Colors.orange, fontFamily: 'assets/GoogleSansRegular.ttf'),
+          textScaler: TextScaler.linear(titleScaleFactor), // Use textScaler
+          style: TextStyle(color: Colors.orange), // Removed fontFamily
         ),
         Text(
           'Machine learning Engineer: Discovering new ways to tackle the problems via ML | Author and Editor at raywenderlich.com',
-          textScaleFactor: 2,
-          style: TextStyle(
+          textScaler: TextScaler.linear(subtitleScaleFactor), // Use textScaler
+          style: TextStyle( // Removed fontFamily
               color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'assets/GoogleSansRegular.ttf'),
+              fontWeight: FontWeight.bold),
         ),
         SizedBox(
           height: 10,
@@ -227,16 +168,16 @@ My achiements:
  
 I am skilled in machine learning, app development(via flutter), and robotics. """,
           softWrap: true,
-          textScaleFactor: 1.2,
-          style: TextStyle(
-              color: Colors.white70,
-              fontFamily: 'assets/GoogleSansRegular.ttf'),
+           textScaler: TextScaler.linear(1.2), // Changed to textScaler for consistency
+          style: TextStyle(color: Colors.white70), // Removed fontFamily
         ),
         SizedBox(
           height: 20,
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        Wrap( // Use Wrap for buttons
+          alignment: WrapAlignment.start, // Align to start
+          spacing: 16.0, // Horizontal spacing between buttons
+          runSpacing: 8.0, // Vertical spacing if they wrap
           children: <Widget>[
             ElevatedButton(
               style: ElevatedButton.styleFrom(
@@ -251,9 +192,7 @@ I am skilled in machine learning, app development(via flutter), and robotics. ""
                     'https://drive.google.com/file/d/1NfZssTc8ar055eyAtlCT8E-lyDVtf0mj/view');
               },
             ),
-            SizedBox(
-              width: 20,
-            ),
+            // SizedBox removed, Wrap handles spacing
             OutlinedButton(
               style: OutlinedButton.styleFrom(
                   side: BorderSide(
@@ -284,80 +223,17 @@ I am skilled in machine learning, app development(via flutter), and robotics. ""
         ],
       ),
       smallScreen: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisSize: MainAxisSize.min, // Changed to min to fit content
+        mainAxisAlignment: MainAxisAlignment.center, // Center content
         children: <Widget>[
           profileImage(context),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.1,
+            height: MediaQuery.of(context).size.height * 0.05, // Reduced spacing
           ),
-          profileData
-        ],
-      ),
-    );
-  }
-}
-
-class SocialInfo extends StatelessWidget {
-  Future<void> _launchUrl(String url) async {
-    final uri = Uri.parse(url);
-    if (!await launchUrl(uri)) {
-      throw Exception('Could not launch $url');
-    }
-  }
-
-  List<Widget> socialMediaWidgets() {
-    return [
-      NavButton(
-        text: 'Github',
-        onPressed: () {
-          _launchUrl('https://github.com/zexross');
-        },
-        color: Colors.blue,
-      ),
-      NavButton(
-        text: 'Twitter',
-        onPressed: () {
-          _launchUrl('https://twitter.com/yougesh_09');
-        },
-        color: Colors.blue,
-      ),
-      NavButton(
-        text: 'Facebook',
-        onPressed: () {
-          _launchUrl('https://www.facebook.com/Yogesh.Choudhary.95');
-        },
-        color: Colors.blue,
-      ),
-    ];
-  }
-
-  Widget copyRightText() => Text(
-        'Yogesh Choudhary ©️2020',
-        textAlign: TextAlign.center,
-        style: TextStyle(
-          color: Colors.grey,
-        ),
-      );
-
-  @override
-  Widget build(BuildContext context) {
-    return ResponsiveWidget(
-      largeScreen: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: socialMediaWidgets(),
-          ),
-          copyRightText(),
-        ],
-      ),
-      smallScreen: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          ...socialMediaWidgets(),
-          copyRightText(),
+          Padding( // Add padding around profileData on small screens
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: profileData,
+          )
         ],
       ),
     );
