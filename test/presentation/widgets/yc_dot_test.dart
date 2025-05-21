@@ -23,8 +23,8 @@ void main() {
     final BoxDecoration? decoration = animatedContainer.decoration as BoxDecoration?;
     expect(decoration?.shape, BoxShape.circle);
     expect(decoration?.color, Colors.orange);
-    expect(animatedContainer.height, 8);
-    expect(animatedContainer.width, 8);
+    expect(animatedContainer.constraints?.minHeight, 8);
+    expect(animatedContainer.constraints?.minWidth, 8);
   });
 
   testWidgets('YCDot displays optional title when provided', (WidgetTester tester) async {
