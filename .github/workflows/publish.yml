@@ -1,17 +1,14 @@
-name: Publish to GitHub Pages
+name: Gh-Pages
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2
-      - run: flutter pub get
-      - uses: bluefireteam/flutter-gh-pages@v7
-        with:
-          baseHref: /${{ github.event.repository.name }}/
+      - uses: bluefireteam/flutter-gh-pages@v9
