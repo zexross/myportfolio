@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         brightness: Brightness.dark,
         primaryColorDark: Colors.black,
-        fontFamily: 'GoogleSansRegular',
+        fontFamily: 'Poppins', // Changed to Poppins
       ),
       scrollBehavior: AppScrollBehavior(),
       routeInformationParser: router.routeInformationParser,

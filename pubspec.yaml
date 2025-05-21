@@ -9,17 +9,17 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons:
-  url_strategy: ^0.2.0
-  layout: ^1.0.3
-  go_router: ^10.0.0
-  atlas_icons: ^0.0.12
-  url_launcher: ^6.1.12
+  cupertino_icons: ^1.0.6 # Added explicit version
+  url_strategy: ^0.3.0 # Updated from ^0.2.0
+  layout: ^1.0.5 # Updated from ^1.0.3
+  go_router: ^10.2.0 # Updated from ^10.0.0
+  atlas_icons: ^0.0.12 # No change
+  url_launcher: ^6.3.1 # Updated from ^6.1.12
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_launcher_icons: ^0.13.1
+  flutter_launcher_icons: ^0.14.3 # Updated from ^0.13.1
 
 flutter_launcher_icons:
   web:
