@@ -53,10 +53,6 @@
   </script>
 <script>
 </script>
-<!-- This script adds the flutter initialization JS code -->
-<script src="https://unpkg.com/canvaskit-wasm@0.37.1/bin/canvaskit.js"></script>
-<link rel="preload" href="https://unpkg.com/canvaskit-wasm@0.37.1/bin/canvaskit.wasm" as="fetch" crossOrigin="anonymous">
-<script src="flutter.js" defer></script>
 <style>
   html{
     background:#070707;
@@ -70,7 +66,7 @@
   margin: auto; display: block;
   }
   .loading{
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
@@ -106,38 +102,7 @@
       <p class="loading-label"></p>
   </div>
     <script>
-
-          {{flutter_js}}
-          {{flutter_build_config}}
-          
-          const texts = [
-          "Swapping time and space...",
-          "Pushing pixels...",
-          "Still faster than Windows update...",
-          "Kindly hold on until I finish a cup of coffee...",
-          "Don't panic, Just count to infinity...",
-        ];
-        const element = document.querySelector('p.loading-label');
-        let i=0;
-        const listener = e => {
-          i = i < texts.length - 1 ? i+1 : 0;
-          element.innerHTML  = texts[i];
-        };
-        element.innerHTML = texts[0];
-        element.addEventListener('animationiteration', listener, false);
-  
-      window.addEventListener('load', function(ev) {
-        // Initialize Flutter configuration
-        _flutter.loader.load({
-          onEntrypointLoaded: function(engineInitializer) {
-            engineInitializer.initializeEngine().then(function(appRunner) {
-              const loader = document.getElementById("loader");
-              loader.remove();
-              appRunner.runApp();
-            });
-          }
-        });
-      });
+      {{flutter_bootstrap_js}}
     </script>
 </body>
 </html>
