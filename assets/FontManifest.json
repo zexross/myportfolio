@@ -1,18 +1,1 @@
-[
-  {
-    "family": "MaterialIcons",
-    "fonts": [
-      {
-        "asset": "https://fonts.gstatic.com/s/materialicons/v42/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2"
-      }
-    ]
-  },
-  {
-    "family": "GoogleSansRegular",
-    "fonts": [
-      {
-        "asset": "GoogleSansRegular.ttf"
-      }
-    ]
-  }
-]
+[{"family":"MaterialIcons","fonts":[{"asset":"fonts/MaterialIcons-Regular.otf"}]},{"family":"Poppins","fonts":[{"asset":"assets/fonts/poppins/Poppins-Regular.ttf"},{"style":"italic","asset":"assets/fonts/poppins/Poppins-Italic.ttf"},{"weight":100,"asset":"assets/fonts/poppins/Poppins-ExtraLight.ttf"},{"weight":200,"asset":"assets/fonts/poppins/Poppins-Light.ttf"},{"weight":400,"asset":"assets/fonts/poppins/Poppins-Medium.ttf"},{"weight":500,"asset":"assets/fonts/poppins/Poppins-Regular.ttf"},{"weight":600,"asset":"assets/fonts/poppins/Poppins-SemiBold.ttf"},{"weight":700,"asset":"assets/fonts/poppins/Poppins-Bold.ttf"},{"weight":800,"asset":"assets/fonts/poppins/Poppins-ExtraBold.ttf"},{"weight":900,"asset":"assets/fonts/poppins/Poppins-Black.ttf"}]},{"family":"Noto Sans","fonts":[{"weight":100,"asset":"assets/fonts/noto/NotoSans-Thin.ttf"},{"weight":200,"asset":"assets/fonts/noto/NotoSans-ExtraLight.ttf"},{"weight":300,"asset":"assets/fonts/noto/NotoSans-Light.ttf"},{"weight":400,"asset":"assets/fonts/noto/NotoSans-Regular.ttf"},{"weight":500,"asset":"assets/fonts/noto/NotoSans-Medium.ttf"},{"weight":600,"asset":"assets/fonts/noto/NotoSans-SemiBold.ttf"},{"weight":700,"asset":"assets/fonts/noto/NotoSans-Bold.ttf"},{"weight":800,"asset":"assets/fonts/noto/NotoSans-ExtraBold.ttf"},{"weight":900,"asset":"assets/fonts/noto/NotoSans-Black.ttf"},{"weight":100,"style":"italic","asset":"assets/fonts/noto/NotoSans-ThinItalic.ttf"},{"weight":200,"style":"italic","asset":"assets/fonts/noto/NotoSans-ExtraLightItalic.ttf"},{"weight":300,"style":"italic","asset":"assets/fonts/noto/NotoSans-LightItalic.ttf"},{"weight":400,"style":"italic","asset":"assets/fonts/noto/NotoSans-Italic.ttf"},{"weight":500,"style":"italic","asset":"assets/fonts/noto/NotoSans-MediumItalic.ttf"},{"weight":600,"style":"italic","asset":"assets/fonts/noto/NotoSans-SemiBoldItalic.ttf"},{"weight":700,"style":"italic","asset":"assets/fonts/noto/NotoSans-BoldItalic.ttf"},{"weight":800,"style":"italic","asset":"assets/fonts/noto/NotoSans-ExtraBoldItalic.ttf"},{"weight":900,"style":"italic","asset":"assets/fonts/noto/NotoSans-BlackItalic.ttf"}]},{"family":"packages/cupertino_icons/CupertinoIcons","fonts":[{"asset":"packages/cupertino_icons/assets/CupertinoIcons.ttf"}]}]
