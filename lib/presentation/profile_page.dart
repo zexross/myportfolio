@@ -163,21 +163,66 @@ class ProfileInfo extends StatelessWidget {
           height: 10,
         ),
         Text(
-          """Primarily a machine learning engineer but also has good experience in app development and embedded system. I am passionate about learning, sharing, discussing technologies and exploring. I love coding for hours and have a very high bias in the field of vehicle automation due to the complexity and challenges involved in achieving level 5 autonomy.
-
-Out of my coding life, I work on polishing my skills, actively sharing my knowledge by writing and editing articles, dismantling and again rebuilding the hardware around me, playing football and watching anime.
-
-My achiements:
- - Researched and built the complex machine learning models as my side projects.
- - Honored with first prize in the Jazbaa1.0 hackathon organized by IIEC community on July 2019 for developing and pitching a vision aid with AI prototype.
- - Founded the AI club in my college on November 2019 and currently coordinating it
- - Successfully served the AIESEC, a non-profit youth run organization for 6 months duration as Incoming Global Talent member from Aug 2018 – Jan 2019. 
- 
-I am skilled in machine learning, app development(via flutter), and robotics. """,
+          "SUMMARY\nExperienced Backend and AI Engineer with 6 years of experience in developing and deploying AI-powered products, ranging from innovative code\ngeneration tools (used by 25,000 developers at Welltested AI) to real-time glucose monitoring systems.\nProven ability to architect complex systems, including microservices architectures and RAG pipelines. Seeking a role in a high-velocity startup tackling\nchallenging engineering problems.",
           softWrap: true,
-          textScaler:
-              TextScaler.linear(1.2), // Changed to textScaler for consistency
-          style: TextStyle(color: Colors.white70), // Removed fontFamily
+          textScaler: TextScaler.linear(1.2),
+          style: TextStyle(color: Colors.white70),
+        ),
+        SizedBox(
+          height: 8, // Adjusted spacing
+        ),
+        Text(
+          "SKILLS",
+          textScaler: TextScaler.linear(1.3), // Slightly larger for title
+          style: TextStyle(
+            color: Colors.white, // White for better visibility
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        SizedBox(
+          height: 8, // Spacing before chips
+        ),
+        Wrap(
+          spacing: 8.0, // Horizontal spacing between chips
+          runSpacing: 4.0, // Vertical spacing between lines of chips
+          children: [
+            "Solutions Architect",
+            "Backend Development",
+            "Machine Learning",
+            "Deep Learning",
+            "Transformers",
+            "LSTM",
+            "CNN",
+            "RNN",
+            "GAN",
+            "RAG",
+            "Reinforcement Learning",
+            "Database",
+            "Vector DB",
+            "Tensorflow",
+            "Pytorch",
+            "LangChain",
+            "Prompt Engineering",
+            "Flutter",
+            "Dart",
+            "Python",
+            "Golang",
+            "C++",
+            "LLM",
+            "LLaMA",
+            "MLOps",
+            "Docker",
+            "Leadership",
+            "Problem Solving",
+            "Research"
+          ]
+              .map((skill) => Chip(
+                    label: Text(skill),
+                    backgroundColor: Colors.grey[800], // Darker chip background
+                    labelStyle: TextStyle(
+                        color: Colors.white70), // Lighter text for chip
+                  ))
+              .toList(),
         ),
         SizedBox(
           height: 20,
@@ -198,7 +243,7 @@ I am skilled in machine learning, app development(via flutter), and robotics. ""
               child: Text('Resume'),
               onPressed: () {
                 _launchUrl(
-                    'https://drive.google.com/file/d/1NfZssTc8ar055eyAtlCT8E-lyDVtf0mj/view');
+                    'https://drive.google.com/file/d/1_ikLaMKd0MkffxyDXh7kWwZKSSBxB3i4/view?usp=sharing');
               },
             ),
             // SizedBox removed, Wrap handles spacing

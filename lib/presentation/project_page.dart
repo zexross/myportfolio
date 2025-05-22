@@ -69,7 +69,8 @@ class _ProjectPageState extends State<ProjectPage> {
               largeScreen: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  NavHeader(navButtons: navButtons(context), pageTitle: "Projects"),
+                  NavHeader(
+                      navButtons: navButtons(context), pageTitle: "Projects"),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.1,
                   ),
@@ -108,12 +109,23 @@ class ProjectList extends StatelessWidget {
               decoration: BoxDecoration(
                 backgroundBlendMode: BlendMode.luminosity,
                 color: Colors.deepOrange,
-                shape: BoxShape.rectangle,
+                // shape: BoxShape.rectangle, // Already default for Container, borderRadius needs it to be non-circular
+                borderRadius:
+                    BorderRadius.circular(8.0), // Added rounded corners
                 image: DecorationImage(
                   image: AssetImage(image),
                   alignment: Alignment.center,
                   fit: BoxFit.fill,
                 ),
+                boxShadow: [
+                  // Added subtle shadow
+                  BoxShadow(
+                    color: Colors.black.withAlpha(51), // 0.2 * 255 ≈ 51
+                    spreadRadius: 1,
+                    blurRadius: 3,
+                    offset: Offset(0, 2), // changes position of shadow
+                  ),
+                ],
               ),
             ),
           ),
