@@ -6,7 +6,7 @@ import 'utils/custom_scroll_behaviour.dart';
 
 void main() {
   setPathUrlStrategy();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         brightness: Brightness.dark,
         primaryColorDark: Colors.black,
-        fontFamily: 'Poppins', // Changed to Poppins
+        fontFamily: 'Poppins',
       ),
       scrollBehavior: AppScrollBehavior(),
       routeInformationParser: router.routeInformationParser,

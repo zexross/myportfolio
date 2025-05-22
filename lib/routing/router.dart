@@ -30,7 +30,7 @@ class WebRouter {
         name: Routes.projectDetail.name,
         path: Routes.projectDetail.path,
         builder: (context, state) =>
-            ProjectInfo(projectTag: state.pathParameters['projectTag']!),
+            ProjectInfoPage(projectTag: state.pathParameters['projectTag']!),
       ),
     ],
     redirect: _rootRedirectCheck,
