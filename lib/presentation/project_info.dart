@@ -149,7 +149,7 @@ class Description extends StatelessWidget {
       children: <Widget>[
         Text(
           'Description',
-          textScaleFactor: 2,
+          textScaler: TextScaler.linear(2),
           style: TextStyle(
             fontWeight: FontWeight.bold,
           ),
@@ -206,7 +206,7 @@ class ProjectDescription extends StatelessWidget {
           Text(
             """$projectDescription""",
             softWrap: true,
-            textScaleFactor: 1.5,
+            textScaler: TextScaler.linear(1.5),
             style: TextStyle(
                 color: Colors.white70,
                 fontFamily: 'assets/GoogleSansRegular.ttf'),

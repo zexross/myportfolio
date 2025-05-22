@@ -93,14 +93,17 @@ class ProfileInfo extends StatelessWidget {
     }
   }
 
-  profileImage(BuildContext context) { // Added BuildContext type
+  profileImage(BuildContext context) {
+    // Added BuildContext type
     final screenWidth = MediaQuery.of(context).size.width;
     double imageSize;
 
     if (ResponsiveWidget.isSmallScreen(context)) {
-      imageSize = screenWidth * 0.4; // Adjusted for small screens (e.g., 40% of width)
+      imageSize =
+          screenWidth * 0.4; // Adjusted for small screens (e.g., 40% of width)
     } else if (ResponsiveWidget.isMediumScreen(context)) {
-      imageSize = screenWidth * 0.3; // Adjusted for medium screens (e.g., 30% of width)
+      imageSize =
+          screenWidth * 0.3; // Adjusted for medium screens (e.g., 30% of width)
     } else {
       imageSize = screenWidth * 0.25; // For large screens
     }
@@ -108,19 +111,20 @@ class ProfileInfo extends StatelessWidget {
     imageSize = imageSize.clamp(100.0, 300.0);
 
     return Container(
-        height: imageSize,
-        width: imageSize,
-        decoration: BoxDecoration(
-          backgroundBlendMode: BlendMode.luminosity,
-          color: Colors.deepOrange,
-          shape: BoxShape.circle,
-          image: DecorationImage(
-            image: AssetImage('assets/me.jpeg'),
-            alignment: Alignment.center,
-            fit: BoxFit.fill,
-          ),
+      height: imageSize,
+      width: imageSize,
+      decoration: BoxDecoration(
+        backgroundBlendMode: BlendMode.luminosity,
+        color: Colors.deepOrange,
+        shape: BoxShape.circle,
+        image: DecorationImage(
+          image: AssetImage('assets/me.jpeg'),
+          alignment: Alignment.center,
+          fit: BoxFit.fill,
         ),
-      );
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -128,10 +132,12 @@ class ProfileInfo extends StatelessWidget {
     double titleScaleFactor = 2.0;
     double subtitleScaleFactor = 1.5; // Adjusted from 2.0 for the longer title
 
-    if (screenWidth < 600) { // Small screens
+    if (screenWidth < 600) {
+      // Small screens
       titleScaleFactor = 1.8;
       subtitleScaleFactor = 1.3;
-    } else if (screenWidth < 1200) { // Medium screens
+    } else if (screenWidth < 1200) {
+      // Medium screens
       titleScaleFactor = 1.9;
       subtitleScaleFactor = 1.4;
     }
@@ -148,7 +154,8 @@ class ProfileInfo extends StatelessWidget {
         Text(
           'Machine learning Engineer: Discovering new ways to tackle the problems via ML | Author and Editor at raywenderlich.com',
           textScaler: TextScaler.linear(subtitleScaleFactor), // Use textScaler
-          style: TextStyle( // Removed fontFamily
+          style: TextStyle(
+              // Removed fontFamily
               color: Colors.white,
               fontWeight: FontWeight.bold),
         ),
@@ -179,19 +186,49 @@ class ProfileInfo extends StatelessWidget {
           spacing: 8.0, // Horizontal spacing between chips
           runSpacing: 4.0, // Vertical spacing between lines of chips
           children: [
-            "Solutions Architect", "Backend Development", "Machine Learning", "Deep Learning", "Transformers", "LSTM", "CNN", "RNN", "GAN", "RAG", "Reinforcement Learning",
-            "Database", "Vector DB", "Tensorflow", "Pytorch", "LangChain", "Prompt Engineering", "Flutter", "Dart", "Python", "Golang", "C++", "LLM", "LLaMA", "MLOps", "Docker", "Leadership",
-            "Problem Solving", "Research"
-          ].map((skill) => Chip(
-                label: Text(skill),
-                backgroundColor: Colors.grey[800], // Darker chip background
-                labelStyle: TextStyle(color: Colors.white70), // Lighter text for chip
-              )).toList(),
+            "Solutions Architect",
+            "Backend Development",
+            "Machine Learning",
+            "Deep Learning",
+            "Transformers",
+            "LSTM",
+            "CNN",
+            "RNN",
+            "GAN",
+            "RAG",
+            "Reinforcement Learning",
+            "Database",
+            "Vector DB",
+            "Tensorflow",
+            "Pytorch",
+            "LangChain",
+            "Prompt Engineering",
+            "Flutter",
+            "Dart",
+            "Python",
+            "Golang",
+            "C++",
+            "LLM",
+            "LLaMA",
+            "MLOps",
+            "Docker",
+            "Leadership",
+            "Problem Solving",
+            "Research"
+          ]
+              .map((skill) => Chip(
+                    label: Text(skill),
+                    backgroundColor: Colors.grey[800], // Darker chip background
+                    labelStyle: TextStyle(
+                        color: Colors.white70), // Lighter text for chip
+                  ))
+              .toList(),
         ),
         SizedBox(
           height: 20,
         ),
-        Wrap( // Use Wrap for buttons
+        Wrap(
+          // Use Wrap for buttons
           alignment: WrapAlignment.start, // Align to start
           spacing: 16.0, // Horizontal spacing between buttons
           runSpacing: 8.0, // Vertical spacing if they wrap
@@ -245,9 +282,11 @@ class ProfileInfo extends StatelessWidget {
         children: <Widget>[
           profileImage(context),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.05, // Reduced spacing
+            height:
+                MediaQuery.of(context).size.height * 0.05, // Reduced spacing
           ),
-          Padding( // Add padding around profileData on small screens
+          Padding(
+            // Add padding around profileData on small screens
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: profileData,
           )
