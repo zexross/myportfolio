@@ -108,12 +108,21 @@ class ProjectList extends StatelessWidget {
               decoration: BoxDecoration(
                 backgroundBlendMode: BlendMode.luminosity,
                 color: Colors.deepOrange,
-                shape: BoxShape.rectangle,
+                // shape: BoxShape.rectangle, // Already default for Container, borderRadius needs it to be non-circular
+                borderRadius: BorderRadius.circular(8.0), // Added rounded corners
                 image: DecorationImage(
                   image: AssetImage(image),
                   alignment: Alignment.center,
                   fit: BoxFit.fill,
                 ),
+                boxShadow: [ // Added subtle shadow
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.2),
+                    spreadRadius: 1,
+                    blurRadius: 3,
+                    offset: Offset(0, 2), // changes position of shadow
+                  ),
+                ],
               ),
             ),
           ),

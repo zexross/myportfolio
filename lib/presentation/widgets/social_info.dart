@@ -38,7 +38,7 @@ class SocialInfo extends StatelessWidget {
   }
 
   Widget copyRightText() => Text(
-        'Yogesh Choudhary ©️2020',
+        'Yogesh Choudhary ©️2024',
         textAlign: TextAlign.center,
         style: TextStyle(
           color: Colors.grey,
