@@ -147,7 +147,7 @@ class ProfileInfo extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          'Hi there! I am Yogesh',
+          "Hi there! I'm Yogesh",
           textScaler: TextScaler.linear(titleScaleFactor), // Use textScaler
           style: TextStyle(color: Colors.orange), // Removed fontFamily
         ),

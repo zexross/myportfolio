@@ -9,9 +9,10 @@
 
   <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="Portfolio">
-  <link rel="apple-touch-icon" href="/icons/Icon-192.png">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Primary Meta Tags -->
   <title>Yogesh Choudhary</title>
@@ -40,7 +41,7 @@
 
   <title>Yogesh Choudhary</title>
   <link rel = "icon" href =  "./icons/Icon-192.png" type = "image/x-icon"> 
-  <link rel="manifest" href="/manifest.json">
+  <link rel="manifest" href="manifest.json">
   <script type="application/javascript">
     function openLink(url, target, isAsync=false) {
       var is_safari = /^(?!.*chrome).*safari/i.test(navigator.userAgent.toLowerCase());
@@ -52,13 +53,7 @@
     }
   </script>
 <script>
-  // The value below is injected by flutter build, do not touch.
-  var serviceWorkerVersion = null;
 </script>
-<!-- This script adds the flutter initialization JS code -->
-<script src="https://unpkg.com/canvaskit-wasm@0.37.1/bin/canvaskit.js"></script>
-<link rel="preload" href="https://unpkg.com/canvaskit-wasm@0.37.1/bin/canvaskit.wasm" as="fetch" crossOrigin="anonymous">
-<script src="flutter.js" defer></script>
 <style>
   html{
     background:#070707;
@@ -72,7 +67,7 @@
   margin: auto; display: block;
   }
   .loading{
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
@@ -108,36 +103,7 @@
       <p class="loading-label"></p>
   </div>
     <script>
-          const texts = [
-          "Swapping time and space...",
-          "Pushing pixels...",
-          "Still faster than Windows update...",
-          "Kindly hold on until I finish a cup of coffee...",
-          "Don't panic, Just count to infinity...",
-        ];
-        const element = document.querySelector('p.loading-label');
-        let i=0;
-        const listener = e => {
-          i = i < texts.length - 1 ? i+1 : 0;
-          element.innerHTML  = texts[i];
-        };
-        element.innerHTML = texts[0];
-        element.addEventListener('animationiteration', listener, false);
-  
-      window.addEventListener('load', function(ev) {
-        _flutter.loader.loadEntrypoint({
-          serviceWorker: {
-            serviceWorkerVersion: serviceWorkerVersion,
-          },
-          onEntrypointLoaded: function(engineInitializer) {
-            engineInitializer.initializeEngine().then(function(appRunner) {
-                const loader = document.getElementById("loader");
-                loader.remove();
-                appRunner.runApp();
-            });
-          }
-        });
-      });
+      {{flutter_bootstrap_js}}
     </script>
 </body>
 </html>
