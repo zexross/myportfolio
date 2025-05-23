@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:myportfolio/presentation/widgets/widgets.dart'; // Import new widgets
-
+import 'package:myportfolio/presentation/widgets/widgets.dart';
 import '../responsive_widget.dart';
 import '../routing/routes.dart';
+import '../configs/constant_colors.dart';
+import '../configs/constant_sizes.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -14,11 +15,6 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
   Future<void> _launchUrl(String url) async {
     final uri = Uri.parse(url);
     if (!await launchUrl(uri)) {
@@ -29,7 +25,9 @@ class _ProfilePageState extends State<ProfilePage> {
   List<Widget> navButtons(BuildContext context) => [
         NavButton(
           text: 'about',
-          onPressed: () {},
+          onPressed: () {
+            // Potentially scroll to an about section or do nothing if already on profile
+          },
         ),
         NavButton(
           text: 'blog',
@@ -49,32 +47,30 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return ResponsiveWidget(
       largeScreen: Scaffold(
-        backgroundColor: Colors.black,
+        // backgroundColor will be inherited from ThemeData -> kPrimaryBackground
         drawer: ResponsiveWidget.isSmallScreen(context)
             ? Drawer(
+                backgroundColor: kSurfaceColor, // Drawer background
                 child: ListView(
-                  padding: const EdgeInsets.all(20),
+                  padding: EdgeInsets.all(spaceMD),
                   children: navButtons(context),
                 ),
               )
             : null,
         body: SingleChildScrollView(
-          child: AnimatedPadding(
-            duration: Duration(seconds: 1),
-            padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.1),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: spaceXL, vertical: spaceLG),
             child: ResponsiveWidget(
               largeScreen: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   NavHeader(navButtons: navButtons(context)),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.1,
-                  ),
+                  SizedBox(height: spaceXL),
                   ProfileInfo(),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.2,
-                  ),
+                  SizedBox(height: spaceXXL),
                   SocialInfo(),
+                  SizedBox(height: spaceLG), // Footer padding
                 ],
               ),
             ),
@@ -93,34 +89,29 @@ class ProfileInfo extends StatelessWidget {
     }
   }
 
-  profileImage(BuildContext context) {
-    // Added BuildContext type
+  Widget profileImage(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     double imageSize;
 
     if (ResponsiveWidget.isSmallScreen(context)) {
-      imageSize =
-          screenWidth * 0.4; // Adjusted for small screens (e.g., 40% of width)
+      imageSize = screenWidth * 0.4;
     } else if (ResponsiveWidget.isMediumScreen(context)) {
-      imageSize =
-          screenWidth * 0.3; // Adjusted for medium screens (e.g., 30% of width)
+      imageSize = screenWidth * 0.3;
     } else {
-      imageSize = screenWidth * 0.25; // For large screens
+      imageSize = screenWidth * 0.20; // Slightly smaller for large screens
     }
-    // Ensure a minimum and maximum size to prevent extreme scaling
-    imageSize = imageSize.clamp(100.0, 300.0);
+    imageSize = imageSize.clamp(120.0, 280.0); // Adjusted clamp values
 
     return Container(
       height: imageSize,
       width: imageSize,
       decoration: BoxDecoration(
-        backgroundBlendMode: BlendMode.luminosity,
-        color: Colors.deepOrange,
         shape: BoxShape.circle,
+        border: Border.all(color: kAccentColor, width: 2), // Subtle border
         image: DecorationImage(
           image: AssetImage('assets/me.jpeg'),
           alignment: Alignment.center,
-          fit: BoxFit.fill,
+          fit: BoxFit.cover, // Changed to cover
         ),
       ),
     );
@@ -128,117 +119,72 @@ class ProfileInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    double titleScaleFactor = 2.0;
-    double subtitleScaleFactor = 1.5; // Adjusted from 2.0 for the longer title
-
-    if (screenWidth < 600) {
-      // Small screens
-      titleScaleFactor = 1.8;
-      subtitleScaleFactor = 1.3;
-    } else if (screenWidth < 1200) {
-      // Medium screens
-      titleScaleFactor = 1.9;
-      subtitleScaleFactor = 1.4;
-    }
-    // Large screens will use the default 2.0 and 1.5
+    final textTheme = Theme.of(context).textTheme;
 
     final profileData = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
           "Hi there! I'm Yogesh",
-          textScaler: TextScaler.linear(titleScaleFactor), // Use textScaler
-          style: TextStyle(color: Colors.orange), // Removed fontFamily
+          style: textTheme.headlineMedium?.copyWith(color: kPrimaryText),
         ),
+        SizedBox(height: spaceSM),
         Text(
           'Machine learning Engineer: Discovering new ways to tackle the problems via ML | Author and Editor at raywenderlich.com',
-          textScaler: TextScaler.linear(subtitleScaleFactor), // Use textScaler
-          style: TextStyle(
-              // Removed fontFamily
-              color: Colors.white,
-              fontWeight: FontWeight.bold),
+          style: textTheme.titleLarge?.copyWith(color: kSecondaryText, fontWeight: FontWeight.w500),
         ),
-        SizedBox(
-          height: 10,
-        ),
+        SizedBox(height: spaceLG),
         Text(
-          "SUMMARY\nExperienced Backend and AI Engineer with 6 years of experience in developing and deploying AI-powered products, ranging from innovative code\ngeneration tools (used by 25,000 developers at Welltested AI) to real-time glucose monitoring systems.\nProven ability to architect complex systems, including microservices architectures and RAG pipelines. Seeking a role in a high-velocity startup tackling\nchallenging engineering problems.",
+          "SUMMARY",
+          style: textTheme.headlineSmall?.copyWith(color: kPrimaryText),
+        ),
+        SizedBox(height: spaceSM),
+        Text(
+          "Experienced Backend and AI Engineer with 6 years of experience in developing and deploying AI-powered products, ranging from innovative code\ngeneration tools (used by 25,000 developers at Welltested AI) to real-time glucose monitoring systems.\nProven ability to architect complex systems, including microservices architectures and RAG pipelines. Seeking a role in a high-velocity startup tackling\nchallenging engineering problems.",
           softWrap: true,
-          textScaler: TextScaler.linear(1.2),
-          style: TextStyle(color: Colors.white70),
+          style: textTheme.bodyMedium?.copyWith(color: kSecondaryText, height: 1.6),
         ),
-        SizedBox(
-          height: 8, // Adjusted spacing
-        ),
+        SizedBox(height: spaceLG),
         Text(
           "SKILLS",
-          textScaler: TextScaler.linear(1.3), // Slightly larger for title
-          style: TextStyle(
-            color: Colors.white, // White for better visibility
-            fontWeight: FontWeight.bold,
-          ),
+          style: textTheme.headlineSmall?.copyWith(color: kPrimaryText),
         ),
-        SizedBox(
-          height: 8, // Spacing before chips
-        ),
+        SizedBox(height: spaceMD),
         Wrap(
-          spacing: 8.0, // Horizontal spacing between chips
-          runSpacing: 4.0, // Vertical spacing between lines of chips
+          spacing: spaceSM,
+          runSpacing: spaceSM,
           children: [
-            "Solutions Architect",
-            "Backend Development",
-            "Machine Learning",
-            "Deep Learning",
-            "Transformers",
-            "LSTM",
-            "CNN",
-            "RNN",
-            "GAN",
-            "RAG",
-            "Reinforcement Learning",
-            "Database",
-            "Vector DB",
-            "Tensorflow",
-            "Pytorch",
-            "LangChain",
-            "Prompt Engineering",
-            "Flutter",
-            "Dart",
-            "Python",
-            "Golang",
-            "C++",
-            "LLM",
-            "LLaMA",
-            "MLOps",
-            "Docker",
-            "Leadership",
-            "Problem Solving",
-            "Research"
+            "Solutions Architect", "Backend Development", "Machine Learning", "Deep Learning",
+            "Transformers", "LSTM", "CNN", "RNN", "GAN", "RAG", "Reinforcement Learning",
+            "Database", "Vector DB", "Tensorflow", "Pytorch", "LangChain", "Prompt Engineering",
+            "Flutter", "Dart", "Python", "Golang", "C++", "LLM", "LLaMA",
+            "MLOps", "Docker", "Leadership", "Problem Solving", "Research"
           ]
               .map((skill) => Chip(
                     label: Text(skill),
-                    backgroundColor: Colors.grey[800], // Darker chip background
-                    labelStyle: TextStyle(
-                        color: Colors.white70), // Lighter text for chip
+                    backgroundColor: kChipBackground,
+                    labelStyle: textTheme.bodySmall?.copyWith(color: kPrimaryText),
+                    padding: EdgeInsets.symmetric(horizontal: spaceSM, vertical: spaceXS),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(spaceSM),
+                      side: BorderSide.none, // Ensure no default border
+                    ),
                   ))
               .toList(),
         ),
-        SizedBox(
-          height: 20,
-        ),
+        SizedBox(height: spaceXL),
         Wrap(
-          // Use Wrap for buttons
-          alignment: WrapAlignment.start, // Align to start
-          spacing: 16.0, // Horizontal spacing between buttons
-          runSpacing: 8.0, // Vertical spacing if they wrap
+          alignment: WrapAlignment.start,
+          spacing: spaceMD,
+          runSpacing: spaceMD,
           children: <Widget>[
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                shape: StadiumBorder(),
-                foregroundColor: Colors.white,
-                backgroundColor: Colors.red,
-                padding: EdgeInsets.all(10),
+                backgroundColor: kAccentColor,
+                foregroundColor: kPrimaryText,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(spaceSM)),
+                padding: EdgeInsets.symmetric(horizontal: spaceLG, vertical: spaceMD),
+                textStyle: textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w600),
               ),
               child: Text('Resume'),
               onPressed: () {
@@ -246,15 +192,14 @@ class ProfileInfo extends StatelessWidget {
                     'https://drive.google.com/file/d/1_ikLaMKd0MkffxyDXh7kWwZKSSBxB3i4/view?usp=sharing');
               },
             ),
-            // SizedBox removed, Wrap handles spacing
             OutlinedButton(
               style: OutlinedButton.styleFrom(
-                  side: BorderSide(
-                    color: Colors.red,
-                  ),
-                  shape: StadiumBorder(),
-                  foregroundColor: Colors.white,
-                  padding: EdgeInsets.all(10)),
+                side: BorderSide(color: kAccentColor, width: 1.5),
+                foregroundColor: kAccentColor,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(spaceSM)),
+                padding: EdgeInsets.symmetric(horizontal: spaceLG, vertical: spaceMD),
+                textStyle: textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w600),
+              ),
               child: Text('Say Hi!'),
               onPressed: () {
                 _launchUrl('mailto:youzendachoudhary22@gmail.com');
@@ -264,30 +209,25 @@ class ProfileInfo extends StatelessWidget {
         )
       ],
     );
+
     return ResponsiveWidget(
       largeScreen: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start, // Align content to the start
+        crossAxisAlignment: CrossAxisAlignment.start, // Align items to the top
         children: <Widget>[
           profileImage(context),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.1,
-          ),
+          SizedBox(width: spaceXL), // Use new spacing constant
           Expanded(child: profileData)
         ],
       ),
       smallScreen: Column(
-        mainAxisSize: MainAxisSize.min, // Changed to min to fit content
-        mainAxisAlignment: MainAxisAlignment.center, // Center content
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           profileImage(context),
-          SizedBox(
-            height:
-                MediaQuery.of(context).size.height * 0.05, // Reduced spacing
-          ),
+          SizedBox(height: spaceLG), // Use new spacing constant
           Padding(
-            // Add padding around profileData on small screens
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            padding: EdgeInsets.symmetric(horizontal: spaceMD), // Use new spacing constant
             child: profileData,
           )
         ],

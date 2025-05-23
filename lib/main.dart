@@ -3,6 +3,7 @@ import 'package:url_strategy/url_strategy.dart';
 
 import 'routing/router.dart';
 import 'utils/custom_scroll_behaviour.dart';
+import 'configs/constant_colors.dart';
 
 void main() {
   setPathUrlStrategy();
@@ -19,8 +20,21 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.dark,
-        primaryColorDark: Colors.black,
+        scaffoldBackgroundColor: kPrimaryBackground,
         fontFamily: 'Poppins',
+        primaryColor: kAccentColor,
+        cardColor: kSurfaceColor,
+        textTheme: const TextTheme(
+          bodyMedium: TextStyle(color: kSecondaryText),
+          headlineSmall: TextStyle(color: kPrimaryText),
+          headlineMedium: TextStyle(color: kPrimaryText),
+          headlineLarge: TextStyle(color: kPrimaryText),
+          // You might want to define other text styles as needed
+        ),
+        colorScheme: ColorScheme.fromSwatch(
+          brightness: Brightness.dark,
+          accentColor: kAccentColor,
+        ).copyWith(primary: kAccentColor, surface: kSurfaceColor),
       ),
       scrollBehavior: AppScrollBehavior(),
       routeInformationParser: router.routeInformationParser,

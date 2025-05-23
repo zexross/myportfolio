@@ -1,35 +1,48 @@
 import 'package:flutter/material.dart';
 
+// New Spacing System (8px grid)
+const double spaceXS = 4.0;
+const double spaceSM = 8.0;
+const double spaceMD = 16.0;
+const double spaceLG = 24.0;
+const double spaceXL = 32.0;
+const double spaceXXL = 48.0;
+const double spaceXXXL = 64.0;
+
+// Old Sizes (To be reviewed and removed/updated)
 const double s0 = 0.0;
-const double s05 = 0.5;
-const double s08 = 0.8;
-const double s1 = 1.0;
-const double s2 = 2.0;
-const double s3 = 3.0;
-const double s4 = 4.0;
-const double s5 = 5.0;
-const double s6 = 6.0;
-const double s8 = 8.0;
-const double s10 = 10.0;
-const double s12 = 12.0;
-const double s14 = 14.0;
-const double s18 = 18.0;
-const double s20 = 20.0;
-const double s24 = 24.0;
-const double s26 = 26.0;
-const double s28 = 28.0;
-const double s30 = 30.0;
-const double s32 = 32.0;
-const double s38 = 38.0;
-const double s40 = 40.0;
-const double s42 = 42.0;
-const double s48 = 48.0;
-const double s50 = 50.0;
-const double s60 = 60.0;
-const double s65 = 65.0;
-const double s70 = 70.0;
-const double s80 = 80.0;
-const double s96 = 96.0;
+// const double s05 = 0.5;
+// const double s08 = 0.8;
+// const double s1 = 1.0;
+// const double s2 = 2.0;
+// const double s3 = 3.0;
+const double s4 = 4.0; // equivalent to spaceXS
+// const double s5 = 5.0;
+// const double s6 = 6.0;
+const double s8 = 8.0; // equivalent to spaceSM
+// const double s10 = 10.0;
+// const double s12 = 12.0;
+// const double s14 = 14.0;
+const double s16 = 16.0; // equivalent to spaceMD
+// const double s18 = 18.0;
+// const double s20 = 20.0;
+const double s24 = 24.0; // equivalent to spaceLG
+// const double s26 = 26.0;
+// const double s28 = 28.0;
+// const double s30 = 30.0;
+const double s32 = 32.0; // equivalent to spaceXL
+// const double s38 = 38.0;
+const double s40 = 40.0; // Can be spaceXL + spaceSM or 5 * spaceSM
+// const double s42 = 42.0;
+const double s48 = 48.0; // equivalent to spaceXXL
+// const double s50 = 50.0;
+const double s56 = 56.0; // 7 * spaceSM
+const double s60 = 60.0; // Can be spaceXXL + spaceMD or spaceXXXL - spaceXS
+const double s64 = 64.0; // equivalent to spaceXXXL
+// const double s65 = 65.0;
+// const double s70 = 70.0;
+const double s80 = 80.0; // 10 * spaceSM
+const double s96 = 96.0; // 12 * spaceSM or spaceXXXL + spaceXL
 const double s100 = 100.0;
 const double s120 = 120.0;
 const double s150 = 150.0;
@@ -38,6 +51,7 @@ const double s200 = 200.0;
 const double s220 = 220.0;
 const double s250 = 250.0;
 const double s400 = 400.0;
+
 
 //duration
 const int d10 = 10;
@@ -71,29 +85,32 @@ const Duration duration4300 = Duration(milliseconds: d4300);
 const Duration duration5000 = Duration(milliseconds: d5000);
 const Duration duration10s = Duration(seconds: d10);
 
-const double _tiny = s4;
-const double _small = s8;
-const double _medium = s14;
-const double _large = s20;
-const double _massive = s32;
-const double _enormous = s60;
+// Updated SizedBox constants using new spacing system
+const double _tiny = spaceXS; // s4
+const double _small = spaceSM; // s8
+const double _medium = spaceMD; // s16 -> previously s14
+const double _large = spaceLG; // s24 -> previously s20
+const double _massive = spaceXL; // s32
+const double _enormous = spaceXXXL; // s64 -> previously s60
+
 
 const SizedBox noSpace = SizedBox.shrink();
 
 const SizedBox horizontalSpaceTiny = SizedBox(width: _tiny);
 const SizedBox horizontalSpaceSmall = SizedBox(width: _small);
-const SizedBox horizontalSpaceMedium = SizedBox(width: _medium);
-const SizedBox horizontalSpaceLarge = SizedBox(width: _large);
+const SizedBox horizontalSpaceMedium = SizedBox(width: _medium); // Now 16px
+const SizedBox horizontalSpaceLarge = SizedBox(width: _large);   // Now 24px
 const SizedBox horizontalSpaceMassive = SizedBox(width: _massive);
-const SizedBox horizontalSpaceEnormous = SizedBox(width: _enormous);
+const SizedBox horizontalSpaceEnormous = SizedBox(width: _enormous); // Now 64px
 
 const SizedBox verticalSpaceTiny = SizedBox(height: _tiny);
 const SizedBox verticalSpaceSmall = SizedBox(height: _small);
-const SizedBox verticalSpaceMedium = SizedBox(height: _medium);
-const SizedBox verticalSpaceLarge = SizedBox(height: _large);
+const SizedBox verticalSpaceMedium = SizedBox(height: _medium); // Now 16px
+const SizedBox verticalSpaceLarge = SizedBox(height: _large);   // Now 24px
 const SizedBox verticalSpaceMassive = SizedBox(height: _massive);
-const SizedBox verticalSpaceEnormous = SizedBox(height: _enormous);
+const SizedBox verticalSpaceEnormous = SizedBox(height: _enormous); // Now 64px
 
+// Keep customSpace for flexibility, though encourage use of new constants
 SizedBox customSpace({double? w, double? h}) => SizedBox(
       width: w ?? 0,
       height: h ?? 0,
